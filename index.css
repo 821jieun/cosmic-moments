@@ -1,4 +1,40 @@
-.wiki-form, .nasa-form {
+
+header {
+  width: 100%;
+}
+
+h1 {
+   text-align: center;
+}
+
+ .nasa-search, .wikipedia-search {
   float: left;
-  width: 50%;
+  width: 45%;
+  padding-left: 30px;
+  margin: 0 auto;
+  
+}
+
+img {
+  width: 100%;
+}
+
+.nasa-search-form {
+  margin-bottom: 10px;
+}
+
+iframe {
+  width: 500px;
+  height: 500px;
+}
+
+.box{
+    display: none;
+    width: 100%;
+}
+
+a:hover + .box,.box:hover{
+    display: block;
+    position: relative;
+    z-index: 100;
 }

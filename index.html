@@ -11,8 +11,11 @@
     <link href="index.css" type="text/css" rel="stylesheet">
   </head>
 <body>
+  <header>
+    <h1>cosmic moments</h1>
+  </header>
   <main role="main">
-    <section role="region" class="nasa-search">
+    <section class="nasa-search">
       <div class="nasa-search-form">
         <form id="js-nasa-search-form" role="form" class="form" action="/search" method="post">
           <label for="query">enter a date between Jun 16 1995 and Mar 04 2018: </label>
@@ -25,7 +28,7 @@
       </div>
     </section>
   	
-    <section role="region" class="wikipedia-form">
+    <section class="wikipedia-search">
       <div class="wikipedia-search-form" hidden>
         <form id="js-wikipedia-search-form" role="form" class="form" action="/search" method="post">
           <label for="query">search wikipedia: </label>
@@ -34,11 +37,15 @@
         </form>
       </div>
       
-      <div class="js-wikipedia-search-results" aria-live="assertive" hidden>
-      </div>
+      <!--<div class="js-wikipedia-search-results" aria-live="assertive" hidden>-->
+      <!--</div>-->
+      <iframe id="iframe" class="js-wikipedia-search-results" aria-live="assertive" hidden>
+      </iframe>
     </section>
     
+    
   </main>
+  
   <script src="index.js"></script>
 
 </body>

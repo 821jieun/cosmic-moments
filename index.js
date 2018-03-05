@@ -17,8 +17,7 @@ function handleWikipediaFormSubmit() {
 }
 
 function getWikipediaSearchResults(searchTerm) {
-  // const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&prop=revisions&inprop=url&utf8=&format=json`;
-  // const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&prop=info&inprop=url&utf8=&format=json`;
+
    const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&inprop=url&utf8=&format=json`;
   console.log(url);
   console.log('inside getWikipediaSearchResults');
@@ -36,19 +35,31 @@ function getWikipediaSearchResults(searchTerm) {
 }
 
 function renderWikiSearchResults(data){
+  var body = $("#iframe").contents().find("body");
+
   const output = $(".js-wikipedia-search-results");
   const results = data.query.search.map((item, index) => htmlifyWikiResults(item));
-  // console.log(results);
-    output
-    .prop('hidden', false)
-    .html(results);
+
+  output
+  .prop('hidden', false)
+  
+  body
+  .html(results);
+}
+
+function todaysDate() {
+  let date = new Date();
+  date = new Array(date);
+  date = date.slice(2, 5);
+  return date;
 }
 
 function htmlifyWikiResults(data) {
   const {title, snippet } = data;
   const url = title.split(' ').join('_');
+ 
     return `
-      <p><a alt="link to ${title} article" href="https://en.wikipedia.org/wiki/${url}">${title}</a></p><p>${snippet}</p>
+      <p><a alt="link to ${title} article" href="https://en.wikipedia.org/wiki/${url}">${title}</a><div class="box"><iframe src="https://en.wikipedia.org/wiki/${url}" width = "500px" height = "500px"></iframe></div></p><p>${snippet}</p>
       `;
 }
 
@@ -80,7 +91,7 @@ function showErr(err) {
   const outputElem = $(".js-search-results");
   
   const errMsg = (
-    `<p>Please try a date between  Jun 16 1995 and Mar 04 2018!</p>`
+    `<p>Please try a date between Jun 16 1995 and Mar 04 2018!</p>`
   );
     
   outputElem
@@ -125,7 +136,7 @@ function convertDate(dateString) {
 function getAstronomyPictureOfTheDay(rootUrl, searchDate) {
 
 	const url = `${rootUrl}&date=${searchDate.year}-${searchDate.month}-${searchDate.date}&api_key=${API_KEY}`;	
-  // console.log(url)
+  console.log(url)
   $.ajax({
   	url: url,
   	dataType: 'json', 
