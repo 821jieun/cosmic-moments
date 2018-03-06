@@ -13,11 +13,11 @@ function todaysDate() {
 
 function showErr(err) {
   const outputElem = $(".js-search-results");
-  
+
   const errMsg = (
     `<p>Please try a different date! Nothing is returned for entry.</p>`
   );
-    
+
   outputElem
     .prop('hidden', false)
     .html(errMsg);
@@ -30,15 +30,38 @@ function convertDate(dateString) {
     "August", "September", "October",
     "November", "December"
   ];
-  
-    let monthName = dateString.slice(0, 2).toLowerCase();
-    const index = monthNames.findIndex(month => month.slice(0, 2).toLowerCase() === monthName);
-    const monthNum = index + 1;
+
+    const dateDividers = [".", "/", "-"];
+    let date;
+    let monthNum;
+    //accounts for if the user enters a number for the month
+    if (parseInt(dateString.slice(0,2))) {
+      monthNum = parseInt(dateString.slice(0,2));
+
+   //accounts for if a user types in 'january' or 'jan'
+    } else {
+      const monthName = dateString.slice(0, 2).toLowerCase();
+      const index = monthNames.findIndex(month => month.slice(0, 2).toLowerCase() === monthName);
+      monthNum = index + 1;
+    }
+
+    //accounts for year
     const year = parseInt(dateString.slice(-4))
-    const date = parseInt(dateString.split(" ")[1]);
+
+    //accounts for user entering '/' and '-' and ',' and '.'
+    for (let i = 0; i < dateDividers.length; i++) {
+      let divider = dateDividers[i];
+      if (dateString.indexOf(divider) !== -1) {
+        date = parseInt(dateString.split(divider)[1]);
+        break;
+      } else {
+        date = parseInt(dateString.split(" ")[1]);
+      }
+    }
+
     return {
-      year: year, 
-      month: monthNum, 
+      year: year,
+      month: monthNum,
       date: date
     }
 }
@@ -53,7 +76,7 @@ function handleWikipediaFormSubmit() {
     let searchTerm = $("#wiki-query").val();
     $("#wiki-query").val('');
     getWikipediaSearchResults(searchTerm);
-   
+
   });
 }
 
@@ -63,7 +86,7 @@ function getWikipediaSearchResults(searchTerm) {
   console.log('inside getWikipediaSearchResults');
     $.ajax({
   	url: url,
-  	dataType: 'jsonp', 
+  	dataType: 'jsonp',
   	type: 'POST',
     headers: { 'Api-User-Agent': 'Example/1.0' },
   	success: function(data) {
@@ -81,7 +104,7 @@ function renderWikiSearchResults(data){
 
   output
   .prop('hidden', false)
-  
+
   body
   .html(results);
 }
@@ -95,7 +118,7 @@ function htmlifyWikiResults(data) {
 
 }
 
-//nasa search form 
+//nasa search form
 function htmlifyNasaResults(data) {
     const { copyright="NASA", explanation, hdurl, title, url } = data;
 
@@ -114,7 +137,7 @@ function renderNasaSearchResults(data) {
     output
     .prop('hidden', false)
     .html(results);
-    
+
     wikiSearchForm
     .prop('hidden', false);
 }
@@ -125,24 +148,25 @@ function handleNasaSubmitForm() {
   $("#js-nasa-search-form").submit((e) => {
     event.preventDefault();
     let searchDate = $("#nasa-query").val();
+      console.log(typeof searchDate, searchDate);
     searchDate = convertDate(searchDate);
-    // console.log(searchDate);
+
     $("input").val('');
     getAstronomyPictureOfTheDay(rootUrl, searchDate)
 
   });
-  
+
 }
 
 
 function getAstronomyPictureOfTheDay(rootUrl, searchDate) {
 
-	const url = `${rootUrl}&date=${searchDate.year}-${searchDate.month}-${searchDate.date}&api_key=${API_KEY}`;	
+	const url = `${rootUrl}&date=${searchDate.year}-${searchDate.month}-${searchDate.date}&api_key=${API_KEY}`;
   console.log(url)
   $.ajax({
   	url: url,
-  	dataType: 'json', 
-  	type: 'GET', 
+  	dataType: 'json',
+  	type: 'GET',
   	success: function(data) {
   		// console.log(data)
   		renderNasaSearchResults(data);
