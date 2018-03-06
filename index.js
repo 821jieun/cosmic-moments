@@ -67,6 +67,7 @@ function handleWikipediaFormSubmit() {
 }
 
 function getWikipediaSearchResults(searchTerm) {
+
   const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&inprop=url&utf8=&format=json`;
 
     $.ajax({
@@ -79,11 +80,10 @@ function getWikipediaSearchResults(searchTerm) {
   		renderWikiSearchResults(data);
   	}
   });
+
 }
 
 function renderWikiSearchResults(data){
-  var body = $("#iframe").contents().find("body");
-
   const output = $(".js-wikipedia-search-results");
   const results = data.query.search.map((item, index) => htmlifyWikiResults(item));
 
@@ -92,6 +92,14 @@ function renderWikiSearchResults(data){
 
   body
   .html(results);
+}
+
+//function to update today's date
+function todaysDate() {
+  let date = new Date();
+  date = new Array(date);
+  date = date.slice(2, 5);
+  return date;
 }
 
 function htmlifyWikiResults(data) {
@@ -108,10 +116,33 @@ function htmlifyWikiResults(data) {
   return `
       <p><a alt="link to ${title} article" href="https://en.wikipedia.org/wiki/${url}">${title}</a><div class="box"><iframe src="https://en.wikipedia.org/wiki/${url}" width = "100%" height="70%" height ="500px"></iframe></div></p>
       `;
-
 }
 
+//lightbox
+function handleLightBoxClick() {
+  const lbBg = $("#lighboxBg");
+  const lb = $("#lightbox");
+ alert("in handleLightBoxClick")
+  lbBg.addClass("displayBlock");
+  lb.addClass("displayBlock")
+}
+
+$(".js-nasa-search-results").on("click", "#lightbox", handleLightBoxClick);
+
+$(".js-nasa-search-results").on("click", "#lightboxBg", handleLightBoxBgClick);
+
+function handleLightBoxBgClick() {
+  const lbBg = $("#lighboxBg");
+  const lb = $("#lightbox");
+  lbBg.style.display = "block";
+  lb.style.display = "block";
+  // lbBg.addClass("dismiss");
+  // lb.addClass("dismiss")
+}
+
+
 //nasa search form
+
 function htmlifyNasaResults(data) {
     const { copyright="NASA", explanation, hdurl, title, url, media_type } = data;
 
@@ -138,6 +169,7 @@ function renderNasaSearchResults(data) {
   const wikiSearchForm = $(".wikipedia-search-form")
   const results = htmlifyNasaResults(data);
   // console.log(results);
+
     output
     .prop('hidden', false)
     .html(results);
@@ -148,7 +180,18 @@ function renderNasaSearchResults(data) {
     placeholderSuggestions();
 }
 
+//error handling function
+function showErr(err) {
+  const outputElem = $(".js-search-results");
 
+  const errMsg = (
+    `<p>Please try a different date! Nothing is returned for entry.</p>`
+  );
+
+  outputElem
+    .prop('hidden', false)
+    .html(errMsg);
+}
 
 function handleNasaSubmitForm() {
   $("#js-nasa-search-form").submit((e) => {
