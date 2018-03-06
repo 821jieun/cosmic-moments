@@ -31,6 +31,7 @@ img {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #iframe {
   height: 100%;
   width: 100%;
@@ -60,26 +61,61 @@ img {
   top: 0px;
   left: 0px;
   opacity: 0.5;
-  display: none;
-  background-color: black;
-  height: 100%;
-  width: 100%;
-}
-      
- #lightBox {
-  position: absolute;
-  top: 25%;
-  left: 40%;
-  display: none;
+=======
+iframe {
+  height: 600px;
+  width: 600px;
 }
 
-/* css for lightbox */
+.button {
+  background: coral;
+  padding: 1em 2m;
+  color: white;
+  border 0;
+}
+
+.button:hover {
+  background: gray;
+}
+
+.modal {
+>>>>>>> initial commit
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 20% auto;
+  padding: 20px;
+  width: 70%;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+}  
+  
+.closeBtn {
+  color: #ccc;
+  float: right;
+  font-size 30px
+}
+
+.closeBtn:hover, .closeBtn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}  
 
 .displayBlock {
   display: block;
 }
 
-.dismiss {
+.displayNone {
   display: none;
 }
 >>>>>>> initial commit

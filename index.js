@@ -17,40 +17,45 @@ function placeholderSuggestions() {
 }
 
 
-function todaysDate() {
-  const monthNames = [
     "January", "February", "March",
     "April", "May", "June", "July",
     "August", "September", "October",
     "November", "December"
   ];
-  let n = new Date();
-  const y = n.getFullYear();
-  const m = n.getMonth();
-  const month = monthNames[m];
-  const d = n.getDate();
-  let date = `${month} ${d} ${y}`;
-  $(".todays-date").text(date);
-  date = convertDate(date);
-  $("#nasa-query").attr("max", date);
 
 }
 
+//handling wikipedia click link to open modal
+$(".js-wikipedia-search-results").on("click", "#modalBtn", openModal);
 
-function convertDate(dateString) {
-
-    //if using date-picker
-   let year = parseInt(dateString.slice(0, 4));
-   console.log(typeof year)
-   let monthNum = parseInt(dateString.slice(6, 8));
-   let date = parseInt(dateString.slice(-2))
-
-    return {
-      year: year,
-      month: monthNum,
-      date: date
-    }
+function openModal() {
+  const modal = $("#simpleModal");
+  console.log("open sesame!")
+  const url = $("a[data-url]");
+  //test it out
+  $("modal-content p").val(url);
+  modal.addClass(".displayBlock");
 }
+
+//listen for modal close
+$(".modal-content").on("click", ".closeBtn", closeModal);
+
+function closeModal() {
+  const modal = $("#simpleModal");
+  modal.addClass(".displayNone");
+}
+
+//listen for background click
+// window.on("click", clickOutside);
+
+// function clickOutside(e) {
+//   const modal = $(".simpleModal");
+//   if (e.target == modal) {
+//     modal.addClass("displayNone")
+//   }
+
+// }
+
 
 //listen for wikipedia search submission
 $('.wikipedia-search-form').on('click', '.wiki-button', handleWikipediaFormSubmit);
@@ -67,7 +72,6 @@ function handleWikipediaFormSubmit() {
 }
 
 function getWikipediaSearchResults(searchTerm) {
-
   const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&inprop=url&utf8=&format=json`;
 
     $.ajax({
@@ -80,10 +84,14 @@ function getWikipediaSearchResults(searchTerm) {
   		renderWikiSearchResults(data);
   	}
   });
+<<<<<<< HEAD
 
+=======
+>>>>>>> initial commit
 }
 
 function renderWikiSearchResults(data){
+
   const output = $(".js-wikipedia-search-results");
   const results = data.query.search.map((item, index) => htmlifyWikiResults(item));
 
@@ -92,14 +100,6 @@ function renderWikiSearchResults(data){
 
   body
   .html(results);
-}
-
-//function to update today's date
-function todaysDate() {
-  let date = new Date();
-  date = new Array(date);
-  date = date.slice(2, 5);
-  return date;
 }
 
 function htmlifyWikiResults(data) {
@@ -116,28 +116,6 @@ function htmlifyWikiResults(data) {
   return `
       <p><a alt="link to ${title} article" href="https://en.wikipedia.org/wiki/${url}">${title}</a><div class="box"><iframe src="https://en.wikipedia.org/wiki/${url}" width = "100%" height="70%" height ="500px"></iframe></div></p>
       `;
-}
-
-//lightbox
-function handleLightBoxClick() {
-  const lbBg = $("#lighboxBg");
-  const lb = $("#lightbox");
- alert("in handleLightBoxClick")
-  lbBg.addClass("displayBlock");
-  lb.addClass("displayBlock")
-}
-
-$(".js-nasa-search-results").on("click", "#lightbox", handleLightBoxClick);
-
-$(".js-nasa-search-results").on("click", "#lightboxBg", handleLightBoxBgClick);
-
-function handleLightBoxBgClick() {
-  const lbBg = $("#lighboxBg");
-  const lb = $("#lightbox");
-  lbBg.style.display = "block";
-  lb.style.display = "block";
-  // lbBg.addClass("dismiss");
-  // lb.addClass("dismiss")
 }
 
 
