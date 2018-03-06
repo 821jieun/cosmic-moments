@@ -24,6 +24,8 @@
         </form>
       </div>
       
+      <div id="lightBoxBg"></div>
+      </div>
       <div class="js-nasa-search-results" aria-live="assertive" hidden>
       </div>
     </section>
@@ -31,14 +33,15 @@
     <section class="wikipedia-search">
       <div class="wikipedia-search-form" hidden>
         <form id="js-wikipedia-search-form" role="form" class="form" action="/search" method="post">
-          <label for="query">learn more about it! enter search term here: </label>
-          <input id="wiki-query" name="search" type="text" placeholder="iridescent clouds..."/>
+          <label for="query">search wikipedia: </label>
+          <input id="wiki-query" name="search" type="text" placeholder="shooting stars..."/>
           <button type="submit" class="wiki-button" aria-label="search-button">search</button>
         </form>
       </div>
       
-      <iframe id="iframe" class="js-wikipedia-search-results" aria-live="assertive" hidden>
-      </iframe>
+    
+      <div class="js-wikipedia-search-results" aria-live="assertive" hidden>
+      
  
     </section>
     

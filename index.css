@@ -23,7 +23,30 @@ img {
   margin-bottom: 10px;
 }
 
-iframe {
-  height: 600px;
-  width: 600px;
+#lightBoxBg {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0.5;
+  display: none;
+  background-color: black;
+  height: 100%;
+  width: 100%;
+}
+      
+ #lightBox {
+  position: absolute;
+  top: 25%;
+  left: 40%;
+  display: none;
+}
+
+/* css for lightbox */
+
+.displayBlock {
+  display: block;
+}
+
+.dismiss {
+  display: none;
 }
