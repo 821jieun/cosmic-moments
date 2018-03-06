@@ -18,16 +18,16 @@
     <section class="nasa-search">
       <div class="nasa-search-form">
         <form id="js-nasa-search-form" role="form" class="form" action="/search" method="post">
-          <label for="query">enter a date between Jun 16 1995 and Mar 04 2018: </label>
-          <input id="nasa-query" name="search" type="text" placeholder="nov 25 2007..."/>
+          <label for="query">enter a date between <span class="start-date">June 16 1995</span> and <span class="todays-date">Mar 04 2018</span>: </label>
+          <input id="nasa-query" name="search" type="text" placeholder="november 25 2007..."/>
           <button type="submit" class="nasa-button" aria-label="search-button">search</button>
         </form>
       </div>
-      
+
       <div class="js-nasa-search-results" aria-live="assertive" hidden>
       </div>
     </section>
-  	
+
     <section class="wikipedia-search">
       <div class="wikipedia-search-form" hidden>
         <form id="js-wikipedia-search-form" role="form" class="form" action="/search" method="post">
@@ -36,15 +36,15 @@
           <button type="submit" class="wiki-button" aria-label="search-button">search</button>
         </form>
       </div>
-      
+
       <iframe id="iframe" class="js-wikipedia-search-results" aria-live="assertive" hidden>
       </iframe>
- 
+
     </section>
-    
-    
+
+
   </main>
-  
+
   <script src="index.js"></script>
 
 </body>

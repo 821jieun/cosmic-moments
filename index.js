@@ -3,12 +3,25 @@
 const API_KEY = 'UO59leZhmMDtmeu9Fp5nTPOCDuMmYFD63bJbFSBU';
 const rootUrl = 'https://api.nasa.gov/planetary/apod?hd=True';
 
+//get today's date
+window.onload = todaysDate();
+
 //helper functions
 function todaysDate() {
-  let date = new Date();
-  date = new Array(date);
-  date = date.slice(2, 5);
-  return date;
+  const monthNames = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+  ];
+  let n = new Date();
+  const y = n.getFullYear();
+  const m = n.getMonth();
+  const month = monthNames[m];
+  const d = n.getDate();
+  const date = `${month} ${d} ${y}`;
+  $(".todays-date").text(date);
+
 }
 
 function showErr(err) {
@@ -157,7 +170,6 @@ function handleNasaSubmitForm() {
   });
 
 }
-
 
 function getAstronomyPictureOfTheDay(rootUrl, searchDate) {
 
