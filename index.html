@@ -5,21 +5,24 @@
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="nasa search app">
     <title>cosmic moments</title>
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="index.css" type="text/css" rel="stylesheet">
   </head>
 <body>
   <header>
     <h1>cosmic moments</h1>
+    <h2>discover amazing photos from NASA's archive</h2>
   </header>
   <main role="main">
     <section class="nasa-search">
       <div class="nasa-search-form">
         <form id="js-nasa-search-form" role="form" class="form" action="/search" method="post">
           <label for="query">enter a date between <span class="start-date">June 16 1995</span> and <span class="todays-date">Mar 04 2018</span>: </label>
-          <input id="nasa-query" name="search" type="text" placeholder="november 25 2007..."/>
+          <!--<input id="nasa-query" name="search" type="text" placeholder="nov 25 2007..."/>-->
+          <input id="nasa-query" name="search" type="date" min="1995-6-16" max=''>
           <button type="submit" class="nasa-button" aria-label="search-button">search</button>
         </form>
       </div>
@@ -37,11 +40,12 @@
         </form>
       </div>
 
-      <iframe id="iframe" class="js-wikipedia-search-results" aria-live="assertive" hidden>
-      </iframe>
-
     </section>
 
+      <div class="video-container">
+        <iframe id="iframe" class="js-wikipedia-search-results" aria-live="assertive" hidden>
+        </iframe>
+      </div>
 
   </main>
 

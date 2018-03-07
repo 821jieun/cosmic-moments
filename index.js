@@ -7,6 +7,16 @@ const rootUrl = 'https://api.nasa.gov/planetary/apod?hd=True';
 window.onload = todaysDate();
 
 //helper functions
+
+function placeholderSuggestions() {
+  alert('inside placeholderSuggestions')
+  const searchExamples = [ 'Want some suggestions?', 'shooting stars', 'quasars', 'iridescent clouds', 'leo triplet', 'globular cluster', 'great comet', 'solar wind', 'nebula', 'From the Earth to the Moon', 'helix', 'neutron star', 'supernova', 'cosmic dust', 'electromagnetic radiation', 'paradigm shift', 'summer triangle', 'nova delphini' ];
+  setInterval(function() {
+    $("input#wiki-query").attr("placeholder", searchExamples[searchExamples.push(searchExamples.shift())-1]);
+  }, 3000);
+}
+
+
 function todaysDate() {
   const monthNames = [
     "January", "February", "March",
@@ -21,56 +31,19 @@ function todaysDate() {
   const d = n.getDate();
   const date = `${month} ${d} ${y}`;
   $(".todays-date").text(date);
+  date = convertDate(date);
+  $("#nasa-query").attr("max", date);
 
 }
 
-function showErr(err) {
-  const outputElem = $(".js-search-results");
-
-  const errMsg = (
-    `<p>Please try a different date! Nothing is returned for entry.</p>`
-  );
-
-  outputElem
-    .prop('hidden', false)
-    .html(errMsg);
-}
 
 function convertDate(dateString) {
-    const monthNames = [
-    "January", "February", "March",
-    "April", "May", "June", "July",
-    "August", "September", "October",
-    "November", "December"
-  ];
 
-    const dateDividers = [".", "/", "-"];
-    let date;
-    let monthNum;
-    //accounts for if the user enters a number for the month
-    if (parseInt(dateString.slice(0,2))) {
-      monthNum = parseInt(dateString.slice(0,2));
-
-   //accounts for if a user types in 'january' or 'jan'
-    } else {
-      const monthName = dateString.slice(0, 2).toLowerCase();
-      const index = monthNames.findIndex(month => month.slice(0, 2).toLowerCase() === monthName);
-      monthNum = index + 1;
-    }
-
-    //accounts for year
-    const year = parseInt(dateString.slice(-4))
-
-    //accounts for user entering '/' and '-' and ',' and '.'
-    for (let i = 0; i < dateDividers.length; i++) {
-      let divider = dateDividers[i];
-      if (dateString.indexOf(divider) !== -1) {
-        date = parseInt(dateString.split(divider)[1]);
-        break;
-      } else {
-        date = parseInt(dateString.split(" ")[1]);
-      }
-    }
+    //if using date-picker
+   let year = parseInt(dateString.slice(0, 4));
+   console.log(typeof year)
+   let monthNum = parseInt(dateString.slice(6, 8));
+   let date = parseInt(dateString.slice(-2))
 
     return {
       year: year,
@@ -95,8 +68,7 @@ function handleWikipediaFormSubmit() {
 
 function getWikipediaSearchResults(searchTerm) {
   const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&inprop=url&utf8=&format=json`;
-  console.log(url);
-  console.log('inside getWikipediaSearchResults');
+
     $.ajax({
   	url: url,
   	dataType: 'jsonp',
@@ -125,20 +97,39 @@ function renderWikiSearchResults(data){
 function htmlifyWikiResults(data) {
   const {title, snippet } = data;
   const url = title.split(' ').join('_');
+
+  //CORS?
+      // return `
+      // <video role="application" crossorigin="anonymous" alt="${title}" src="${url}" controls ></video><p>${explanation}</p>
+      //   <p>copyright: ${copyright}</p>
+      // `
+
+  //why can't height of iframe be adjusted?
   return `
-      <p><a alt="link to ${title} article" href="https://en.wikipedia.org/wiki/${url}">${title}</a><div class="box"><iframe src="https://en.wikipedia.org/wiki/${url}" width = "500px" height = "500px"></iframe></div></p><p>${snippet}</p>
+      <p><a alt="link to ${title} article" href="https://en.wikipedia.org/wiki/${url}">${title}</a><div class="box"><iframe src="https://en.wikipedia.org/wiki/${url}" width = "100%" height="70%" height ="500px"></iframe></div></p>
       `;
 
 }
 
 //nasa search form
 function htmlifyNasaResults(data) {
-    const { copyright="NASA", explanation, hdurl, title, url } = data;
+    const { copyright="NASA", explanation, hdurl, title, url, media_type } = data;
 
-    return `
-      <a href="${hdurl}" target="_blank" alt="${title}"><img alt="${title}" src="${url}"></a><p>${explanation}</p>
-      <p>copyright: ${copyright}</p>
-      `;
+    if (media_type === "image") {
+
+      return `
+        <a href="${hdurl}" target="_blank" alt="${title}"><img alt="${title}" src="${url}"></a><p>${explanation}</p>
+        <p>copyright: ${copyright}</p>
+        `;
+    }
+
+    if (media_type === "video") {
+      return `
+      <iframe class="nasa-video" alt="${title}" src="${url}" width="90%" ></iframe><p>${explanation}</p>
+        <p>copyright: ${copyright}</p>
+      `
+    }
+
 }
 
 
@@ -153,6 +144,8 @@ function renderNasaSearchResults(data) {
 
     wikiSearchForm
     .prop('hidden', false);
+
+    placeholderSuggestions();
 }
 
 
@@ -161,7 +154,7 @@ function handleNasaSubmitForm() {
   $("#js-nasa-search-form").submit((e) => {
     event.preventDefault();
     let searchDate = $("#nasa-query").val();
-      console.log(typeof searchDate, searchDate);
+    //   console.log(typeof searchDate, searchDate);
     searchDate = convertDate(searchDate);
 
     $("input").val('');
@@ -180,9 +173,24 @@ function getAstronomyPictureOfTheDay(rootUrl, searchDate) {
   	dataType: 'json',
   	type: 'GET',
   	success: function(data) {
-  		// console.log(data)
+  		console.log(data)
   		renderNasaSearchResults(data);
-  	}
+  	},
+  error: function(request,status,errorThrown) {
+
+  const outputElem = $(".js-search-results");
+  outputElem
+    .prop('hidden', false)
+    .html(`${errorThrown}`);
+  // const errMsg = (
+  //   `<p>Please try a different date! Nothing is returned for that entry.</p>`
+  // );
+
+  // outputElem
+  //   .prop('hidden', false)
+  //   .html(errMsg);
+
+   }
   });
 
 }
