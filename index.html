@@ -5,57 +5,85 @@
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="nasa search app">
     <title>cosmic moments</title>
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="index.css" type="text/css" rel="stylesheet">
   </head>
 <body>
   <header>
     <h1>cosmic moments</h1>
+    <h2>discover amazing photos from NASA's archive</h2>
   </header>
   <main role="main">
     <section class="nasa-search">
       <div class="nasa-search-form">
         <form id="js-nasa-search-form" role="form" class="form" action="/search" method="post">
-          <label for="query">enter a date between Jun 16 1995 and Mar 04 2018: </label>
-          <input id="nasa-query" name="search" type="text" placeholder="nov 25 2007..."/>
+          <div class="nativeDatePicker">
+            <label for="query">enter a date between <span class="start-date">June 16 1995</span> and <span class="todays-date">Mar 04 2018</span>: </label>
+            <input id="nasa-query" name="search" type="date" min="1995-6-16" max=''>
+          </div>
+          <span class="validity"></span>
+          <!--fallback start-->
+
+                <p class="fallbackLabel">enter a date between <span class="start-date">June 16 1995</span> and <span class="todays-date">Mar 04 2018</span></p>
+                <div class="fallbackDatePicker">
+                  <span>
+                    <label for="day">Day:</label>
+                    <select id="day" name="day">
+                    </select>
+                  </span>
+                  <span>
+                    <label for="month">Month:</label>
+                    <select id="month" name="month">
+                      <option selected>January</option>
+                      <option>February</option>
+                      <option>March</option>
+                      <option>April</option>
+                      <option>May</option>
+                      <option>June</option>
+                      <option>July</option>
+                      <option>August</option>
+                      <option>September</option>
+                      <option>October</option>
+                      <option>November</option>
+                      <option>December</option>
+                    </select>
+                  </span>
+                  <span>
+                    <label for="year">Year:</label>
+                    <select id="year" name="year">
+                    </select>
+                  </span>
+                </div>
+    <!--fallback code end-->
           <button type="submit" class="nasa-button" aria-label="search-button">search</button>
         </form>
       </div>
-      
+
       <div class="js-nasa-search-results" aria-live="assertive" hidden>
       </div>
     </section>
-  	
+
     <section class="wikipedia-search">
       <div class="wikipedia-search-form" hidden>
         <form id="js-wikipedia-search-form" role="form" class="form" action="/search" method="post">
-          <label for="query">search wikipedia: </label>
-          <input id="wiki-query" name="search" type="text" placeholder="shooting stars..."/>
+          <label for="query">learn more about it! enter search term here: </label>
+          <input id="wiki-query" name="search" type="text" placeholder="iridescent clouds..."/>
           <button type="submit" class="wiki-button" aria-label="search-button">search</button>
         </form>
       </div>
-      
-      <div class="js-wikipedia-search-results" aria-live="assertive" hidden>
+
+    </section>
+
+      <div class="video-container">
+        <iframe id="iframe" class="js-wikipedia-search-results" aria-live="assertive" hidden>
+        </iframe>
       </div>
-    
-      <div id="simpleModal" class="modal">
-        <div class="modal-content">
-         <span class="closeBtn">&times;</span>
-        <p>hello i am a modal</p>
-       </div>
-     </div>
-   </section>
-    
-    
- 
 
-
-    
-    
   </main>
-  
+
   <script src="index.js"></script>
 
 </body>
