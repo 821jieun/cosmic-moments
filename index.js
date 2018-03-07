@@ -36,12 +36,13 @@ function todaysDate() {
 
 
 function convertDate(dateString) {
-
+console.log('date string', dateString);
     //if using date-picker
    let year = parseInt(dateString.slice(0, 4));
    console.log(typeof year)
-   let monthNum = parseInt(dateString.slice(6, 8));
-   let date = parseInt(dateString.slice(-2))
+   let monthNum = parseInt(dateString.slice(5, 7));
+   const date = parseInt(dateString.slice(-2));
+   console.log('date', date);
 
     return {
       year: year,

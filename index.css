@@ -78,3 +78,12 @@ iframe {
 .displayNone {
   display: none;
 }
+
+.nasa-button {
+  display: inline-block;
+}
+
+#nasa-query {
+  display: inline-block;
+
+}
