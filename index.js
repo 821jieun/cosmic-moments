@@ -29,7 +29,7 @@ function todaysDate() {
   const m = n.getMonth();
   const month = monthNames[m];
   const d = n.getDate();
-  const date = `${month} ${d} ${y}`;
+  let date = `${month} ${d} ${y}`;
   $(".todays-date").text(date);
   date = convertDate(date);
   $("#nasa-query").attr("max", date);
