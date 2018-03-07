@@ -250,7 +250,7 @@ function htmlifyWikiResults(data) {
 
   //why can't height of iframe be adjusted?
   return `
-      <p><a alt="link to ${title} article" href="https://en.wikipedia.org/wiki/${url}">${title}</a><div class="box"><iframe src="https://en.wikipedia.org/wiki/${url}" width = "100%" height="70%" height ="500px"></iframe></div></p>
+      <p><a alt="link to ${title} article" href="https://en.wikipedia.org/wiki/${url}">${title}</a><div class="box"><iframe src="https://en.wikipedia.org/wiki/${url}" width = "100%" height="70%""></iframe></div></p>
       `;
 
 }
