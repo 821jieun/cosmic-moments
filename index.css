@@ -92,4 +92,16 @@ img {
 .displayNone {
   display: none;
 }
+<<<<<<< HEAD
 >>>>>>> initial commit
+=======
+
+.nasa-button {
+  display: inline-block;
+}
+
+#nasa-query {
+  display: inline-block;
+
+}
+>>>>>>> fixed slice index in convertDate function
