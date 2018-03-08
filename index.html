@@ -10,6 +10,7 @@
     crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="index.css" type="text/css" rel="stylesheet">
+    <link href="float-grid.css" type="text/css" rel="stylesheet">
   </head>
 <body>
   <header>
@@ -80,14 +81,23 @@
       <div class="wikipedia-search-form" hidden>
         <form id="js-wikipedia-search-form" role="form" class="form" action="/search" method="post">
           <label for="query">learn more about it! enter search term here: </label>
-          <input id="wiki-query" name="search" type="text" placeholder="iridescent clouds..."/>
+          <input id="wiki-query" name="search" type="text" />
           <button type="submit" class="wiki-button" aria-label="search-button">search</button>
         </form>
       </div>
 
+      <div class="js-wikipedia-search-results" aria-live="assertive" hidden>
+      </div>
+
+
+      <div class="modal">
+        <div class="modal-content">
+         <span class="closeBtn">&times;</span>
+       </div>
+     </div>
     </section>
 
-      <div class="video-container">
+      <!-- <div class="video-container">
         <iframe id="iframe" class="js-wikipedia-search-results" aria-live="assertive" hidden>
         </iframe>
 
@@ -108,8 +118,6 @@
 
 
 
-=======
-      </div>
 
 >>>>>>> added date picker fallback
   </main>

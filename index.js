@@ -193,6 +193,20 @@ daySelect.onchange = function() {
   previousDay = daySelect.value;
 }
 
+//listen for click on wikipedia link to open modal
+$(".js-wikipedia-search-results").on("click", ".wikiModal", openModal);
+
+function openModal(event) {
+  event.preventDefault();
+  const modal = $(".modal");
+  console.log("inside open modal")
+  const url = $(this).data("url");
+  console.log('url', url)
+  //test it out
+  $(".modal-content").append(`<p>${url}</p>`);
+  modal.addClass("displayBlock");
+}
+
 //listen for wikipedia search submission
 $('.wikipedia-search-form').on('click', '.wiki-button', handleWikipediaFormSubmit);
 
@@ -227,16 +241,16 @@ function getWikipediaSearchResults(searchTerm) {
 }
 
 function renderWikiSearchResults(data){
-  var body = $("#iframe").contents().find("body");
+  // var body = $("#iframe").contents().find("body");
 
   const output = $(".js-wikipedia-search-results");
   const results = data.query.search.map((item, index) => htmlifyWikiResults(item));
 
   output
   .prop('hidden', false)
-
-  body
   .html(results);
+  // body
+  // .html(results);
 }
 
 function htmlifyWikiResults(data) {
@@ -250,9 +264,13 @@ function htmlifyWikiResults(data) {
       // `
 
   //why can't height of iframe be adjusted?
+  // return `
+  //     <p><a alt="link to ${title} article" href="https://en.wikipedia.org/wiki/${url}">${title}</a><div class="box"><iframe src="https://en.wikipedia.org/wiki/${url}" width = "100%" height="70%""></iframe></div></p>
+  //     `;
+
   return `
-      <p><a alt="link to ${title} article" href="https://en.wikipedia.org/wiki/${url}">${title}</a><div class="box"><iframe src="https://en.wikipedia.org/wiki/${url}" width = "100%" height="70%""></iframe></div></p>
-      `;
+  <p><a class="wikiModal" data-url="https://en.wikipedia.org/wiki/${url}" alt="link to ${title} article" href="https://en.wikipedia.org/wiki/${url}">${title}</a></p><p>${snippet}</p>
+  `;
 
 }
 
