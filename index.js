@@ -201,11 +201,21 @@ function openModal(event) {
   const modal = $(".modal");
   console.log("inside open modal")
   const url = $(this).data("url");
-  console.log('url', url)
-  //test it out
-  $(".modal-content").append(`<p>${url}</p>`);
+  // $(".modal-content").append(`<p>${url}</p>`);
+    $.get(url, function(data) {
+      $(".modal-content").html(data).foundation("open");
+    });
   modal.addClass("displayBlock");
 }
+
+//listen for click on close button to close modal
+$(".modal-content").on("click", ".closeBtn", closeModal);
+
+function closeModal() {
+  const modal = $(".modal");
+  modal.addClass("displayNone");
+}
+
 
 //listen for wikipedia search submission
 $('.wikipedia-search-form').on('click', '.wiki-button', handleWikipediaFormSubmit);
