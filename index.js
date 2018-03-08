@@ -199,13 +199,29 @@ $(".js-wikipedia-search-results").on("click", ".wikiModal", openModal);
 function openModal(event) {
   event.preventDefault();
   const modal = $(".modal");
+  const modalDiv = $("#modalDiv");
   console.log("inside open modal")
   const url = $(this).data("url");
   // $(".modal-content").append(`<p>${url}</p>`);
     $.get(url, function(data) {
-      $(".modal-content").html(data).foundation("open");
+      alert(data);
+        // renderClickedWikiLinkInsideIframe(data)
+      // $(".modal-content").html(data).foundation("open");
     });
+
+  if (modalDiv.hasClass("displayNone")) {
+    modal.removeClass("displayNone");
+  }
   modal.addClass("displayBlock");
+}
+
+function renderClickedWikiLinkInsideIframe(data) {
+  const body = $("#iframe").contents().find("body");
+  // return `
+  //     <p><a alt="link to ${title} article" href="https://en.wikipedia.org/wiki/${url}">${title}</a><div class="box"><iframe src="https://en.wikipedia.org/wiki/${url}" width = "100%" height="70%""></iframe></div></p>
+  //     `;
+  body
+  .html(data);
 }
 
 //listen for click on close button to close modal
@@ -213,6 +229,7 @@ $(".modal-content").on("click", ".closeBtn", closeModal);
 
 function closeModal() {
   const modal = $(".modal");
+
   modal.addClass("displayNone");
 }
 
@@ -250,7 +267,7 @@ function getWikipediaSearchResults(searchTerm) {
 >>>>>>> initial commit
 }
 
-function renderWikiSearchResults(data){
+function renderWikiSearchResults(data) {
   // var body = $("#iframe").contents().find("body");
 
   const output = $(".js-wikipedia-search-results");
@@ -262,6 +279,8 @@ function renderWikiSearchResults(data){
   // body
   // .html(results);
 }
+
+
 
 function htmlifyWikiResults(data) {
   const {title, snippet } = data;
