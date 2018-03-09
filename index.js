@@ -149,7 +149,7 @@ function htmlifyNasaResults(data) {
       return `
         <h4 class="title">${title}</h4>
         <h4>Date: ${date}</h4>
-        <a href="${hdurl}" target="_blank" alt="${title}"><img alt="${title}" src="${url}"></a><p>${explanation}</p>
+        <a href="${hdurl}" target="_blank" alt="${title}"><span class="sr-only">opens in new window</span><img alt="${title}" src="${url}"></a><p>${explanation}</p>
         <p>copyright: ${copyright}</p>
         `;
     }
@@ -203,7 +203,7 @@ function getAstronomyPictureOfTheDay(rootUrl, searchDate) {
   	dataType: 'json',
   	type: 'GET',
   	success: function(data) {
-      console.log(data)
+      console.log('get astronomy picture of the day', data)
   		renderNasaSearchResults(data);
   	},
   error: function(err) {
@@ -215,7 +215,8 @@ function getAstronomyPictureOfTheDay(rootUrl, searchDate) {
     .html(`<p>${errorMessage}</p>`);
    }
   });
-
 }
+
+
 
 $(handleNasaSubmitForm);
