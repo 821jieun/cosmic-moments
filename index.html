@@ -9,23 +9,24 @@
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
     <link href="index.css" type="text/css" rel="stylesheet">
-    <link href="float-grid.css" type="text/css" rel="stylesheet">
+    <!-- <link href="float-grid.css" type="text/css" rel="stylesheet"> -->
   </head>
 <body>
+  <div class="container">
   <header>
     <h1>cosmic moments</h1>
     <h2>discover amazing photos from NASA's archive</h2>
   </header>
-  <main role="main">
+  <main class="main" role="main">
     <section class="nasa-search">
       <div class="nasa-search-form">
         <form id="js-nasa-search-form" role="form" class="form" action="/search" method="post">
           <div class="nativeDatePicker">
-            <label for="query">enter a date between <span class="start-date">June 16 1995</span> and <span class="todays-date">Mar 04 2018</span>: </label><br/>
+            <label class="user-direction" for="query">enter a date between <span class="start-date">June 16 1995</span> and <span class="todays-date">Mar 04 2018</span>: </label>
             <input id="nasa-query" name="search" type="date" min="1995-6-16" max=''>
-          </div>
+
           <span class="validity"></span>
           <!--fallback start-->
 
@@ -60,7 +61,8 @@
                   </span>
                 </div>
     <!--fallback code end-->
-          <button type="submit" class="nasa-button" aria-label="search-button">search</button>
+            <button type="submit" class="nasa-button" aria-label="search-button">search</button>
+          </div>
         </form>
       </div>
 
@@ -71,7 +73,7 @@
     <section class="wikipedia-search">
       <div class="wikipedia-search-form" hidden>
         <form id="js-wikipedia-search-form" role="form" class="form" action="/search" method="post">
-          <label for="query">learn more about it!: </label>
+          <label class="learn-more" for="query">learn more: </label>
           <input id="wiki-query" name="search" type="text" />
           <button type="submit" class="wiki-button" aria-label="search-button">search</button>
         </form>
@@ -81,15 +83,15 @@
       </div>
 
       <div class="wiki-entry-iframe" aria-live="assertive" hidden>
-        <button class="back-button">back to results</button>
-        <iframe id="iframe" src="" height="100%" width="50%"></iframe>
+        <button class="back-button" hidden>back to results</button>
+        <iframe id="iframe" src="" hidden></iframe>
       </div>
 
     </section>
 
 
-
-  </main>
+  </div>
+</main>
 
   <script src="index.js"></script>
   <script src="datepicker.js"></script>

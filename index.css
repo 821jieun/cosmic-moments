@@ -1,34 +1,125 @@
-
-header {
-  width: 100%;
+* ,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
-h1, h2 {
-   text-align: center;
+body {
+  font-family: 'Lora', serif;
+  margin: 25px;
 }
 
-.nasa-search, .wikipedia-search {
-  float: left;
-  width: 45%;
-  padding-left: 30px;
-  margin: 0 auto;
+/* style date picker*/
+::-webkit-datetime-edit { padding: 1em; }
+::-webkit-datetime-edit-fields-wrapper { background: silver; }
+::-webkit-datetime-edit-text { color: red; padding: 0 0.3em; }
+::-webkit-datetime-edit-month-field { color: blue; }
+::-webkit-datetime-edit-day-field { color: green; }
+::-webkit-datetime-edit-year-field { color: purple; }
+::-webkit-inner-spin-button { display: none; }
+::-webkit-calendar-picker-indicator { background: orange; }
 
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+h1 {
+  /* -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: black;
+  color: white; */
+}
+
+h2 {
+
+}
+
+.main {
+  flex: 5;
+  display: flex;
+}
+
+section {
+  flex: 1;
+  justify-content: space-around;
+}
+
+.wikipedia-search {
+  background-color: pink;
+}
+.nasa-search {
+  background-color: yellow;
+}
+
+/* style nasa search form */
+.nativeDatePicker {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.user-direction {
+  flex: 4;
+  text-align: center;
+}
+
+#nasa-query {
+  flex: 1;
+}
+
+#nasa-button {
+  flex: 1;
+}
+
+/* style wiki search form */
+#js-wikipedia-search-form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.learn-more {
+  flex: 1;
+  text-align: center;
 }
 
 #wiki-query {
-  width: 200px;
+  flex: 4;
+}
+
+.wiki-button {
+  flex: 1;
+}
+
+
+/* style iframe */
+
+.wiki-entry-iframe {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+
+}
+
+.back-button {
+  flex: 1;
+}
+
+#iframe {
+  flex: 9
+  border: 2px solid red;
+
 }
 
 img {
-  width: 100%;
-}
-
-.nasa-search-form, .wikipedia-search-form {
-  margin-bottom: 10px;
-}
-
-iframe {
-  height: 100%;
   width: 100%;
 }
 

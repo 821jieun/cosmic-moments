@@ -63,7 +63,7 @@ function handleWikipediaFormSubmit() {
 }
 
 function getWikipediaSearchResults(searchTerm) {
-  const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&inprop=url&utf8=&format=json`;
+  const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&inprop=url&utf8=&format=json&origin=*`;
 
     $.ajax({
   	url: url,
@@ -115,6 +115,12 @@ function handleWikiEntryClick(e) {
   output
   .prop("hidden", false)
 
+  $(".back-button")
+  .prop("hidden", false)
+
+  $("#iframe")
+  .prop("hidden", false)
+
   body
   .html(url)
 
@@ -133,14 +139,16 @@ function handleBackButtonClick(e) {
 }
 //nasa search form
 function htmlifyNasaResults(data) {
-    const { copyright="NASA", explanation, hdurl, title, url, media_type } = data;
-    $("#wiki-query").attr("placeholder", title);
+    const { copyright="NASA", date, explanation, hdurl, title, url, media_type } = data;
+    const placeholderText = `e.g. ${title}`;
+    $("#wiki-query").attr("placeholder", placeholderText);
 
     if (media_type === "image") {
 
 
       return `
         <h4 class="title">${title}</h4>
+        <h4>Date: ${date}</h4>
         <a href="${hdurl}" target="_blank" alt="${title}"><img alt="${title}" src="${url}"></a><p>${explanation}</p>
         <p>copyright: ${copyright}</p>
         `;
@@ -149,6 +157,7 @@ function htmlifyNasaResults(data) {
     if (media_type === "video") {
       return `
       <h4 class="title">${title}</h4>
+      <h4>Date: ${date}</h4>
       <iframe class="nasa-video" alt="${title}" src="${url}" width="100%" ></iframe><p>${explanation}</p>
         <p>copyright: ${copyright}</p>
       `
@@ -194,22 +203,16 @@ function getAstronomyPictureOfTheDay(rootUrl, searchDate) {
   	dataType: 'json',
   	type: 'GET',
   	success: function(data) {
+      console.log(data)
   		renderNasaSearchResults(data);
   	},
-  error: function(request,status,errorThrown) {
-
-  const outputElem = $(".js-search-results");
+  error: function(err) {
+  console.log('error here', err.responseJSON.msg);
+  const errorMessage = err.responseJSON.msg;
+  const outputElem = $(".js-nasa-search-results");
   outputElem
     .prop('hidden', false)
-    .html(`${errorThrown}`);
-  // const errMsg = (
-  //   `<p>Please try a different date! Nothing is returned for that entry.</p>`
-  // );
-
-  // outputElem
-  //   .prop('hidden', false)
-  //   .html(errMsg);
-
+    .html(`<p>${errorMessage}</p>`);
    }
   });
 
