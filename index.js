@@ -78,7 +78,6 @@ function getWikipediaSearchResults(searchTerm) {
 }
 
 function renderWikiSearchResults(data){
-  var body = $("#iframe").contents().find("body");
 
   const output = $(".js-wikipedia-search-results");
   const results = data.query.search.map((item, index) => htmlifyWikiResults(item));
@@ -86,8 +85,7 @@ function renderWikiSearchResults(data){
   output
   .prop('hidden', false)
   .html(results);
-  // body
-  // .html(results);
+
 }
 
 function htmlifyWikiResults(data) {
@@ -95,23 +93,23 @@ function htmlifyWikiResults(data) {
   const url = title.split(' ').join('_');
 
   return `
-  <p><a class="wiki-entry" data-url="https://en.wikipedia.org/wiki/${url}" alt="link to ${title} article" href="https://en.wikipedia.org/wiki/${url}">${title}</a></p><p>${snippet}</p>
+  <p class="wiki-entry-title"><a class="wiki-entry" data-url="https://en.wikipedia.org/wiki/${url}" alt="link to ${title} article" href="https://en.wikipedia.org/wiki/${url}">${title}</a>
+  </p><p class="wiki-snippet">${snippet}...</p>
   `;
 }
 //on wiki-entry click, have an iframe
 $(".js-wikipedia-search-results").on("click", ".wiki-entry", handleWikiEntryClick);
 
 function handleWikiEntryClick(e) {
-  var body = $("#iframe").contents().find("body");
-
-  console.log('inside handle wiki entry click')
   e.preventDefault();
+  const body = $("#iframe").contents().find("body");
   const output = $(".wiki-entry-iframe");
   const url = $(this).data("url");
 
   $(".js-wikipedia-search-results").addClass("displayNone");
   $("#iframe").removeClass("displayNone");
   $("#iframe").attr("src", url);
+
   output
   .prop("hidden", false)
 
@@ -134,9 +132,9 @@ function handleBackButtonClick(e) {
   $(".js-wikipedia-search-results").removeClass("displayNone");
   $("#iframe").addClass("displayNone");
   $("#iframe").attr("src", "");
-
-
+  $(".back-button").addClass("displayNone");
 }
+
 //nasa search form
 function htmlifyNasaResults(data) {
     const { copyright="NASA", date, explanation, hdurl, title, url, media_type } = data;
@@ -149,7 +147,7 @@ function htmlifyNasaResults(data) {
       return `
         <h4 class="title">${title}</h4>
         <h4>Date: ${date}</h4>
-        <a href="${hdurl}" target="_blank" alt="${title}"><span class="sr-only">opens in new window</span><img alt="${title}" src="${url}"></a><p>${explanation}</p>
+        <a href="${hdurl}" target="_blank" alt="${title}"><span class="sr-only">opens in new window</span><img alt="${title}" src="${url}"></a><p class="nasa-explanation">${explanation}</p>
         <p>copyright: ${copyright}</p>
         `;
     }
@@ -158,7 +156,7 @@ function htmlifyNasaResults(data) {
       return `
       <h4 class="title">${title}</h4>
       <h4>Date: ${date}</h4>
-      <iframe class="nasa-video" alt="${title}" src="${url}" width="100%" ></iframe><p>${explanation}</p>
+      <iframe class="nasa-video" alt="${title}" src="${url}" width="100%" ></iframe><p class="nasa-explanation">${explanation}</p>
         <p>copyright: ${copyright}</p>
       `
     }

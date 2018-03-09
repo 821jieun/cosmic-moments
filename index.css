@@ -27,6 +27,7 @@ body {
 }
 
 .header {
+  -webkit-flex: 1;
   flex: 1;
   display: flex;
   align-items: flex-end;
@@ -55,85 +56,106 @@ h2:after {
 }
 
 .main {
+  -webkit-flex: 1;
   flex: 5;
   display: flex;
 }
 
 section {
+  -webkit-flex: 1;
   flex: 1;
   justify-content: space-around;
 }
 
-/* .wikipedia-search {
-  background-color: pink;
-}
-.nasa-search {
-  background-color: yellow;
-} */
-
 /* style nasa search form */
 .nativeDatePicker {
+  display: -webkit-flex;
   display: flex;
   justify-content: space-around;
+  -webkit-align-items: center;
   align-items: center;
+  background-color: rgb(211,211,211)
 }
 
 .user-direction {
+  -webkit-flex: 4;
   flex: 4;
   text-align: center;
+  font-size: 16px;
 }
 
 #nasa-query {
+  -webkit-flex: 1;
   flex: 1;
 }
 
 #nasa-button {
+  -webkit-flex: 1;
   flex: 1;
 }
 
 /* style wiki search form */
 #js-wikipedia-search-form {
+  display: -webkit-flex;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  background-color: rgb(211,211,211)
+
 }
 
 .learn-more {
+  -webkit-flex: 1;
   flex: 1;
   text-align: center;
+
 }
 
 #wiki-query {
+  -webkit-flex: 1;
   flex: 4;
 }
 
 .wiki-button {
+  -webkit-flex: 1;
   flex: 1;
 }
 
 
 /* style iframe */
 .wiki-entry-iframe {
+  display: -webkit-flex;
   display: flex;
-  flex-direction: column;
+  -webkit-flex-direction: column;
+  -webkit-justify-content: stretch;
   justify-content: stretch;
 
 }
 
 .back-button {
+  -webkit-flex: 1;
   flex: 1;
 }
 
 #iframe {
-  flex: 9
+  -webkit-flex: 9;
+  flex: 9;
   border: 2px solid red;
 }
 
 img {
   width: 100%;
+  border-radius: 20px;
+  /* box-shadow: 8px 8px 10px #aaa; */
 }
 
+.nasa-video {
+  width: 100%;
+  /* box-shadow: 8px 8px 10px #aaa; */
+  border-radius: 20px;
+}
 
+}
 .displayNone {
   display: none;
 }
@@ -148,4 +170,22 @@ img {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+}
+
+/*style wikipedia search result links*/
+.wiki-entry-title {
+  /* font-size: 16px; */
+}
+
+.wiki-snippet {
+
+}
+
+.wikipedia-search {
+  margin-left: 20px;
+
+}
+
+.nasa-explanation {
+
 }
