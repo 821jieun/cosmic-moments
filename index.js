@@ -114,8 +114,8 @@ function handleWikiEntryClick(e) {
   output
   .prop("hidden", false)
 
-  $(".back-button")
-  .prop("hidden", false)
+  $(".back-button").show();
+  // .prop("hidden", false)
 
   $("#iframe")
   .prop("hidden", false)
@@ -157,7 +157,7 @@ function htmlifyNasaResults(data) {
       return `
       <h4 class="title">${title}</h4>
       <h4>Date: ${date}</h4>
-      <iframe class="nasa-video" alt="${title}" src="${url}" width="100%" ></iframe><p class="nasa-explanation">${explanation}</p>
+      <iframe class="nasa-video" alt="${title}" src="${url}" width="100%" height="100%"></iframe><p class="nasa-explanation">${explanation}</p>
         <p>copyright: ${copyright}</p>
       `
     }

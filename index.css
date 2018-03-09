@@ -121,11 +121,24 @@ section {
   flex: 1;
 }
 
+/*styleiframe*/
+.wikipedia-search{
+  flex: display;
+}
+
+.wikipedia-search-form {
+  flex: 1;
+}
+
+.wiki-entry-iframe {
+  flex: 1;
+}
 
 /* style iframe */
 .wiki-entry-iframe {
   display: -webkit-flex;
   display: flex;
+  flex-direction: column;
   -webkit-flex-direction: column;
   -webkit-justify-content: stretch;
   justify-content: stretch;
@@ -138,12 +151,14 @@ section {
 }
 
 #iframe {
-  -webkit-flex: 9;
+  -webkit-flex: 1;
   flex: 1;
   border: 2px solid red;
-  overflow-y: auto;
+
+  /* overflow-y: auto; */
 }
 
+/*image*/
 img {
   width: 100%;
   border-radius: 20px;
