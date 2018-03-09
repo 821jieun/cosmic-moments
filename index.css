@@ -139,8 +139,9 @@ section {
 
 #iframe {
   -webkit-flex: 9;
-  flex: 9;
+  flex: 1;
   border: 2px solid red;
+  overflow-y: auto;
 }
 
 img {
@@ -155,7 +156,7 @@ img {
   border-radius: 20px;
 }
 
-}
+
 .displayNone {
   display: none;
 }

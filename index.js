@@ -97,6 +97,7 @@ function htmlifyWikiResults(data) {
   </p><p class="wiki-snippet">${snippet}...</p>
   `;
 }
+
 //on wiki-entry click, have an iframe
 $(".js-wikipedia-search-results").on("click", ".wiki-entry", handleWikiEntryClick);
 
@@ -188,7 +189,9 @@ function handleNasaSubmitForm() {
 
     $("input").val('');
     getAstronomyPictureOfTheDay(rootUrl, searchDate)
-
+    // $("#wiki-query").val("");
+    // $(".wiki-search-results").hide();
+    // $("#iframe").hide();
   });
 
 }
