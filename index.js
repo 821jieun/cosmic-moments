@@ -197,17 +197,15 @@ function findTextAddLink(wordAndUriPairs, explanation) {
 
 
 
-$(".nasa-search-form").on("click", ".annotated-link", onAnnotatedLinkClick);
+$(".js-nasa-search-results").on("click", ".annotated-link", onAnnotatedLinkClick);
 
 function onAnnotatedLinkClick(e) {
   e.preventDefault();
   const body = $("#iframe").contents().find("body");
-  const uri = $(this).data();
+  const uri = $(this).data('uri');
   console.log('this is the annotated link clicked on', uri);
 
-
   const output = $(".wiki-entry-iframe");
-  const url = $(this).data("url");
 
   $(".js-wikipedia-search-results").addClass("displayNone");
   $("#iframe").removeClass("displayNone");
