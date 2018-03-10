@@ -122,7 +122,7 @@ section {
 }
 
 /*styleiframe*/
-.wikipedia-search{
+/* .wikipedia-search{
   flex: display;
 }
 
@@ -132,7 +132,7 @@ section {
 
 .wiki-entry-iframe {
   flex: 1;
-}
+} */
 
 /* style iframe */
 .wiki-entry-iframe {
@@ -145,14 +145,18 @@ section {
 
 }
 
+.wiki-entry-iframe {
+  height: 100%
+}
+
 .back-button {
   -webkit-flex: 1;
   flex: 1;
 }
 
 #iframe {
-  -webkit-flex: 1;
-  flex: 1;
+  -webkit-flex: 11;
+  flex: 11;
   border: 2px solid red;
 
   /* overflow-y: auto; */
