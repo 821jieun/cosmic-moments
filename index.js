@@ -136,10 +136,67 @@ function handleBackButtonClick(e) {
   $(".back-button").addClass("displayNone");
 }
 
+function annotateWithDandelion(explanation){
+  const token = '2e0335e9f4b440f7aa8283398c390d69';
+  let text = explanation;
+  text = text.split(" ").join("%20");
+  const url = `https://api.dandelion.eu/datatxt/nex/v1/?text=${text}&include=categories%2Cabstract%2Cimage%2Clod&token=${token}`;
+  
+    $.ajax({
+      url: url, 
+      dataType: 'json', 
+      type: 'GET', 
+      success: function(data) {     
+        console.log('annotated dandelion data', data);
+        addInLinks(explanation, data);
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
+}
+
+function addInLinks(explanation, data) {
+  let explWithLinksHtml;
+
+  //  data.annotations.forEach((annotation) => {
+    
+  //   let uri = annotation.uri;
+
+  //   if (annotation.start && annotation.end) {
+  //     let startIndex = annotation.start;
+  //     let endIndex = annotation.end ;
+  //     let word = explanation.slice(startIndex, endIndex + 1)
+     
+
+  //     let beforeWord = explanation.slice(0, startIndex - 1);
+  //     let afterWord = explanation.slice(endIndex + 1);
+  //     explWithLinksHtml = `<p>${beforeWord}<a class="annotated-link" data-uri="${uri}" href="${uri}" alt="link to ${word}">${word}</a>${afterWord}</p>`
+  //   }
+
+  // });
+
+  
+
+  console.log('explWithLinksHtml', explWithLinksHtml);
+  return explWithLinksHtml;
+}
+
+$(".js-nasa-search-results").on("click", "annotated-link", onAnnotedLinkClick);
+
+function onAnnotedLinkClick(e) {
+  e.preventDefault();
+  const uri = $(this).data()
+  console.log('this is the annotated link clikced on', uri);
+}
+
 //nasa search form
 function htmlifyNasaResults(data) {
-    const { copyright="NASA", date, explanation, hdurl, title, url, media_type } = data;
+    let { copyright="NASA", date, explanation, hdurl, title, url, media_type } = data;
     const placeholderText = `e.g. ${title}`;
+
+    explanation = annotateWithDandelion(explanation);
+
     $("#wiki-query").attr("placeholder", placeholderText);
 
     if (media_type === "image") {
