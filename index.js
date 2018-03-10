@@ -50,80 +50,80 @@ function convertDate(dateString) {
 }
 
 //listen for wikipedia search submission
-$('.wikipedia-search-form').on('click', '.wiki-button', handleWikipediaFormSubmit);
+// $('.wikipedia-search-form').on('click', '.wiki-button', handleWikipediaFormSubmit);
 
-function handleWikipediaFormSubmit() {
-  $("#js-wikipedia-search-form").submit((e) => {
-    e.preventDefault();
-    let searchTerm = $("#wiki-query").val();
-    $("#wiki-query").val('');
-    getWikipediaSearchResults(searchTerm);
+// function handleWikipediaFormSubmit() {
+//   $("#js-wikipedia-search-form").submit((e) => {
+//     e.preventDefault();
+//     let searchTerm = $("#wiki-query").val();
+//     $("#wiki-query").val('');
+//     getWikipediaSearchResults(searchTerm);
 
-  });
-}
+//   });
+// }
 
-function getWikipediaSearchResults(searchTerm) {
-  const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&inprop=url&utf8=&format=json&origin=*`;
+// function getWikipediaSearchResults(searchTerm) {
+//   const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&inprop=url&utf8=&format=json&origin=*`;
 
-    $.ajax({
-  	url: url,
-  	dataType: 'jsonp',
-  	type: 'POST',
-    headers: { 'Api-User-Agent': 'Example/1.0' },
-  	success: function(data) {
-      console.log('wiki search results', data)
-  		renderWikiSearchResults(data);
-  	}
-  });
-}
+//     $.ajax({
+//   	url: url,
+//   	dataType: 'jsonp',
+//   	type: 'POST',
+//     headers: { 'Api-User-Agent': 'Example/1.0' },
+//   	success: function(data) {
+//       console.log('wiki search results', data)
+//   		renderWikiSearchResults(data);
+//   	}
+//   });
+// }
 
-function renderWikiSearchResults(data){
+// function renderWikiSearchResults(data){
 
-  const output = $(".js-wikipedia-search-results");
-  const results = data.query.search.map((item, index) => htmlifyWikiResults(item));
+//   const output = $(".js-wikipedia-search-results");
+//   const results = data.query.search.map((item, index) => htmlifyWikiResults(item));
 
-  output
-  .prop('hidden', false)
-  .html(results);
+//   output
+//   .prop('hidden', false)
+//   .html(results);
 
-}
+// }
 
-function htmlifyWikiResults(data) {
-  const {title, snippet } = data;
-  const url = title.split(' ').join('_');
+// function htmlifyWikiResults(data) {
+//   const {title, snippet } = data;
+//   const url = title.split(' ').join('_');
 
-  return `
-  <p class="wiki-entry-title"><a class="wiki-entry" data-url="https://en.wikipedia.org/wiki/${url}" alt="link to ${title} article" href="https://en.wikipedia.org/wiki/${url}">${title}</a>
-  </p><p class="wiki-snippet">${snippet}...</p>
-  `;
-}
+//   return `
+//   <p class="wiki-entry-title"><a class="wiki-entry" data-url="https://en.wikipedia.org/wiki/${url}" alt="link to ${title} article" href="https://en.wikipedia.org/wiki/${url}">${title}</a>
+//   </p><p class="wiki-snippet">${snippet}...</p>
+//   `;
+// }
 
 //on wiki-entry click, have an iframe
-$(".js-wikipedia-search-results").on("click", ".wiki-entry", handleWikiEntryClick);
+// $(".js-wikipedia-search-results").on("click", ".wiki-entry", handleWikiEntryClick);
 
-function handleWikiEntryClick(e) {
-  e.preventDefault();
-  const body = $("#iframe").contents().find("body");
-  const output = $(".wiki-entry-iframe");
-  const url = $(this).data("url");
+// function handleWikiEntryClick(e) {
+//   e.preventDefault();
+//   const body = $("#iframe").contents().find("body");
+//   const output = $(".wiki-entry-iframe");
+//   const url = $(this).data("url");
 
-  $(".js-wikipedia-search-results").addClass("displayNone");
-  $("#iframe").removeClass("displayNone");
-  $("#iframe").attr("src", url);
+//   $(".js-wikipedia-search-results").addClass("displayNone");
+//   $("#iframe").removeClass("displayNone");
+//   $("#iframe").attr("src", url);
 
-  output
-  .prop("hidden", false)
+//   output
+//   .prop("hidden", false)
 
-  $(".back-button").show();
-  // .prop("hidden", false)
+//   $(".back-button").show();
+//   // .prop("hidden", false)
 
-  $("#iframe")
-  .prop("hidden", false)
+//   $("#iframe")
+//   .prop("hidden", false)
 
-  body
-  .html(url)
+//   body
+//   .html(url)
 
-}
+// }
 
 //on back arrow, return list of results from earlier
 $(".wiki-entry-iframe").on("click", ".back-button", handleBackButtonClick);
@@ -160,7 +160,7 @@ function matchTextAndUri(explanation, data) {
   let wordAndUriPairs = data.annotations.map((annotation) => {
     let uri = annotation.uri;
     let startIndex = annotation.start;
-    let endIndex = annotation.end;
+    let endIndex = annotation.end + 1;
     let annotatedText = explanation.slice(startIndex, endIndex);
     return [annotatedText, annotatedText.length, uri];
   });
@@ -193,12 +193,32 @@ function findTextAddLink(wordAndUriPairs, explanation) {
 
 
 
-$(".js-nasa-search-results").on("click", "annotated-link", onAnnotedLinkClick);
+$(".js-nasa-search-results").on("click", ".annotated-link", onAnnotatedLinkClick);
 
-function onAnnotedLinkClick(e) {
+function onAnnotatedLinkClick(e) {
   e.preventDefault();
-  const uri = $(this).data()
-  console.log('this is the annotated link clikced on', uri);
+  const uri = $(this).data();
+  console.log('this is the annotated link clicked on', uri);
+
+  const body = $("#iframe").contents().find("body");
+  const output = $(".wiki-entry-iframe");
+  const url = $(this).data("url");
+
+  $(".js-wikipedia-search-results").addClass("displayNone");
+  $("#iframe").removeClass("displayNone");
+  $("#iframe").attr("src", uri);
+
+  output
+  .prop("hidden", false)
+
+  $(".back-button").show();
+  // .prop("hidden", false)
+
+  $("#iframe")
+  .prop("hidden", false)
+
+  body
+  .html(uri)
 }
 
 //nasa search form
