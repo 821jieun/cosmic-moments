@@ -141,12 +141,12 @@ function annotateWithDandelion(explanation){
   let text = explanation;
   text = text.split(" ").join("%20");
   const url = `https://api.dandelion.eu/datatxt/nex/v1/?text=${text}&include=categories%2Cabstract%2Cimage%2Clod&token=${token}`;
-  
+
     $.ajax({
-      url: url, 
-      dataType: 'json', 
-      type: 'GET', 
-      success: function(data) {     
+      url: url,
+      dataType: 'json',
+      type: 'GET',
+      success: function(data) {
         console.log('annotated dandelion data', data);
         matchTextAndUri(explanation, data);
       },
@@ -160,7 +160,7 @@ function matchTextAndUri(explanation, data) {
   let wordAndUriPairs = data.annotations.map((annotation) => {
     let uri = annotation.uri;
     let startIndex = annotation.start;
-    let endIndex = annotation.end + 1;
+    let endIndex = annotation.end;
     let annotatedText = explanation.slice(startIndex, endIndex);
     return [annotatedText, annotatedText.length, uri];
   });
@@ -176,31 +176,36 @@ function findTextAddLink(wordAndUriPairs, explanation) {
     let word = pair[0];
     let uri = pair[2];
 
-    let startIndex = expl.indexOf(word);
-    let endIndex = startIndex + pair[1];
+    if (expl.indexOf(word) !== -1) {
+      let startIndex = expl.indexOf(word);
+      let endIndex = startIndex + pair[1] + 1;
 
-    let beforeWord = expl.slice(0, startIndex);
-    // let afterWord = originalExpl.slice(endIndex);
-    expl = expl.slice(endIndex);
-   
-    explWithLinksHtml += `${beforeWord}<a class="annotated-link" data-uri="${uri}" href="${uri}" alt="link to ${word}">${word}</a>`;
- 
+      let beforeWord = expl.slice(0, startIndex);
+      let afterWord = expl.slice(endIndex);
+      expl = expl.slice(endIndex);
+      // console.log('newly defined expl here', expl);
+      explWithLinksHtml += ` ${beforeWord}<a class="annotated-link" data-uri="${uri}" href="${uri}" alt="link to ${word}">${word}</a>`;
+
+    }
+
+
   })
   console.log('this is explanation inside findTextAddLink', `<p class="nasa-explanation">${explWithLinksHtml}</p>`);
-  $(".nasa-explanation").html(explWithLinksHtml);
-  
+  $(".nasa-explanation").html(`${explWithLinksHtml}.`);
+
 }
 
 
 
-$(".js-nasa-search-results").on("click", ".annotated-link", onAnnotatedLinkClick);
+$(".nasa-search-form").on("click", ".annotated-link", onAnnotatedLinkClick);
 
 function onAnnotatedLinkClick(e) {
   e.preventDefault();
+  const body = $("#iframe").contents().find("body");
   const uri = $(this).data();
   console.log('this is the annotated link clicked on', uri);
 
-  const body = $("#iframe").contents().find("body");
+
   const output = $(".wiki-entry-iframe");
   const url = $(this).data("url");
 
@@ -211,7 +216,7 @@ function onAnnotatedLinkClick(e) {
   output
   .prop("hidden", false)
 
-  $(".back-button").show();
+  // $(".back-button").show();
   // .prop("hidden", false)
 
   $("#iframe")
@@ -227,6 +232,9 @@ function htmlifyNasaResults(data) {
     const placeholderText = `e.g. ${title}`;
 
     explanation = annotateWithDandelion(explanation);
+    // if (!explanation) {
+    //   explanation = "Loading..."
+    // }
     console.log('this is explanation inside htmlifyNasaResults', explanation)
 
     $("#wiki-query").attr("placeholder", placeholderText);
@@ -237,7 +245,7 @@ function htmlifyNasaResults(data) {
       return `
         <h4 class="title">${title}</h4>
         <h4>Date: ${date}</h4>
-        <a href="${hdurl}" target="_blank" alt="${title}"><span class="sr-only">opens in new window</span><img alt="${title}" src="${url}"></a><p class="nasa-explanation"></p>
+        <a href="${hdurl}" target="_blank" alt="${title}"><span class="sr-only">opens in new window</span><img alt="${title}" src="${url}"></a><p class="nasa-explanation">${explanation}</p>
         <p>copyright: ${copyright}</p>
         `;
     }

@@ -121,17 +121,9 @@ section {
   flex: 1;
 }
 
-/*styleiframe*/
-.wikipedia-search{
-  flex: display;
-}
-
-.wikipedia-search-form {
-  flex: 1;
-}
-
+/*to ensure the iframe is full height*/
 .wiki-entry-iframe {
-  flex: 1;
+  height 100%;
 }
 
 /* style iframe */
@@ -154,8 +146,6 @@ section {
   -webkit-flex: 1;
   flex: 1;
   border: 2px solid red;
-
-  /* overflow-y: auto; */
 }
 
 /*image*/
@@ -186,22 +176,4 @@ img {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
-}
-
-/*style wikipedia search result links*/
-.wiki-entry-title {
-  /* font-size: 16px; */
-}
-
-.wiki-snippet {
-
-}
-
-.wikipedia-search {
-  margin-left: 20px;
-
-}
-
-.nasa-explanation {
-
 }
