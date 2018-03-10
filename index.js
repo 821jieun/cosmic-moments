@@ -148,7 +148,7 @@ function annotateWithDandelion(explanation){
       type: 'GET', 
       success: function(data) {     
         console.log('annotated dandelion data', data);
-        addInLinks(explanation, data);
+        matchTextAndUri(explanation, data);
       },
       error: function(err) {
         console.log(err);
@@ -156,31 +156,42 @@ function annotateWithDandelion(explanation){
     });
 }
 
-function addInLinks(explanation, data) {
-  let explWithLinksHtml;
-
-  //  data.annotations.forEach((annotation) => {
-    
-  //   let uri = annotation.uri;
-
-  //   if (annotation.start && annotation.end) {
-  //     let startIndex = annotation.start;
-  //     let endIndex = annotation.end ;
-  //     let word = explanation.slice(startIndex, endIndex + 1)
-     
-
-  //     let beforeWord = explanation.slice(0, startIndex - 1);
-  //     let afterWord = explanation.slice(endIndex + 1);
-  //     explWithLinksHtml = `<p>${beforeWord}<a class="annotated-link" data-uri="${uri}" href="${uri}" alt="link to ${word}">${word}</a>${afterWord}</p>`
-  //   }
-
-  // });
-
-  
-
-  console.log('explWithLinksHtml', explWithLinksHtml);
-  return explWithLinksHtml;
+function matchTextAndUri(explanation, data) {
+  let wordAndUriPairs = data.annotations.map((annotation) => {
+    let uri = annotation.uri;
+    let startIndex = annotation.start;
+    let endIndex = annotation.end;
+    let annotatedText = explanation.slice(startIndex, endIndex);
+    return [annotatedText, annotatedText.length, uri];
+  });
+  console.log('wordAndUriPairs here', wordAndUriPairs)
+  findTextAddLink(wordAndUriPairs, explanation);
 }
+
+function findTextAddLink(wordAndUriPairs, explanation) {
+  let explWithLinksHtml = "";
+  let expl = explanation;
+
+  wordAndUriPairs.forEach((pair) => {
+    let word = pair[0];
+    let uri = pair[2];
+
+    let startIndex = expl.indexOf(word);
+    let endIndex = startIndex + pair[1];
+
+    let beforeWord = expl.slice(0, startIndex);
+    // let afterWord = originalExpl.slice(endIndex);
+    expl = expl.slice(endIndex);
+   
+    explWithLinksHtml += `${beforeWord}<a class="annotated-link" data-uri="${uri}" href="${uri}" alt="link to ${word}">${word}</a>`;
+ 
+  })
+  console.log('this is explanation inside findTextAddLink', `<p class="nasa-explanation">${explWithLinksHtml}</p>`);
+  $(".nasa-explanation").html(explWithLinksHtml);
+  
+}
+
+
 
 $(".js-nasa-search-results").on("click", "annotated-link", onAnnotedLinkClick);
 
@@ -196,6 +207,7 @@ function htmlifyNasaResults(data) {
     const placeholderText = `e.g. ${title}`;
 
     explanation = annotateWithDandelion(explanation);
+    console.log('this is explanation inside htmlifyNasaResults', explanation)
 
     $("#wiki-query").attr("placeholder", placeholderText);
 
@@ -205,7 +217,7 @@ function htmlifyNasaResults(data) {
       return `
         <h4 class="title">${title}</h4>
         <h4>Date: ${date}</h4>
-        <a href="${hdurl}" target="_blank" alt="${title}"><span class="sr-only">opens in new window</span><img alt="${title}" src="${url}"></a><p class="nasa-explanation">${explanation}</p>
+        <a href="${hdurl}" target="_blank" alt="${title}"><span class="sr-only">opens in new window</span><img alt="${title}" src="${url}"></a><p class="nasa-explanation"></p>
         <p>copyright: ${copyright}</p>
         `;
     }
