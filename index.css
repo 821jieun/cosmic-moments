@@ -137,9 +137,10 @@ section {
 
 }
 
-.back-button {
-  -webkit-flex: 1;
-  flex: 1;
+.close-button {
+  color: #ccc;
+  float: right;
+  font-size 30px
 }
 
 #iframe {

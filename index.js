@@ -125,15 +125,14 @@ function convertDate(dateString) {
 
 // }
 
-//on back arrow, return list of results from earlier
-$(".wiki-entry-iframe").on("click", ".back-button", handleBackButtonClick);
+//on close button, disappear iframe
+$(".wiki-entry-iframe").on("click", ".close-button", handleCloseButtonClick);
 
-function handleBackButtonClick(e) {
+function handleCloseButtonClick(e) {
   e.preventDefault();
-  $(".js-wikipedia-search-results").removeClass("displayNone");
   $("#iframe").addClass("displayNone");
   $("#iframe").attr("src", "");
-  $(".back-button").addClass("displayNone");
+  $(".close-button").addClass("displayNone");
 }
 
 function annotateWithDandelion(explanation){
@@ -211,10 +210,11 @@ function onAnnotatedLinkClick(e) {
   $("#iframe").removeClass("displayNone");
   $("#iframe").attr("src", uri);
 
+
   output
   .prop("hidden", false)
 
-  // $(".back-button").show();
+  $(".close-button").show();
   // .prop("hidden", false)
 
   $("#iframe")

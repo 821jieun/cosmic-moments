@@ -72,19 +72,22 @@
     </section>
 
     <section class="wikipedia-search">
-      <div class="wikipedia-search-form" hidden>
+      <!-- <div class="wikipedia-search-form" hidden>
         <form id="js-wikipedia-search-form" role="form" class="form" action="/search" method="post">
           <label class="learn-more" for="query">learn more: </label>
           <input id="wiki-query" aria-label="wiki-search-box" name="search" type="text" />
           <button type="submit" class="wiki-button" aria-label="search-button">search</button>
         </form>
-      </div>
+      </div> -->
+
 
       <div class="js-wikipedia-search-results" aria-live="assertive" hidden>
       </div>
 
       <div class="wiki-entry-iframe" aria-live="assertive" hidden>
-        <button class="back-button" hidden>back to results</button>
+        <span class="close-button" hidden>&times;</span>
+
+        <!-- <button class="back-button" hidden>back to results</button> -->
         <iframe id="iframe" title="wikipedia-entry" src="" height="100%" width="100%" hidden></iframe>
       </div>
 
