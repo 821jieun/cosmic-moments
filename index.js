@@ -49,81 +49,6 @@ function convertDate(dateString) {
     }
 }
 
-//listen for wikipedia search submission
-// $('.wikipedia-search-form').on('click', '.wiki-button', handleWikipediaFormSubmit);
-
-// function handleWikipediaFormSubmit() {
-//   $("#js-wikipedia-search-form").submit((e) => {
-//     e.preventDefault();
-//     let searchTerm = $("#wiki-query").val();
-//     $("#wiki-query").val('');
-//     getWikipediaSearchResults(searchTerm);
-
-//   });
-// }
-
-// function getWikipediaSearchResults(searchTerm) {
-//   const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&inprop=url&utf8=&format=json&origin=*`;
-
-//     $.ajax({
-//   	url: url,
-//   	dataType: 'jsonp',
-//   	type: 'POST',
-//     headers: { 'Api-User-Agent': 'Example/1.0' },
-//   	success: function(data) {
-//       console.log('wiki search results', data)
-//   		renderWikiSearchResults(data);
-//   	}
-//   });
-// }
-
-// function renderWikiSearchResults(data){
-
-//   const output = $(".js-wikipedia-search-results");
-//   const results = data.query.search.map((item, index) => htmlifyWikiResults(item));
-
-//   output
-//   .prop('hidden', false)
-//   .html(results);
-
-// }
-
-// function htmlifyWikiResults(data) {
-//   const {title, snippet } = data;
-//   const url = title.split(' ').join('_');
-
-//   return `
-//   <p class="wiki-entry-title"><a class="wiki-entry" data-url="https://en.wikipedia.org/wiki/${url}" alt="link to ${title} article" href="https://en.wikipedia.org/wiki/${url}">${title}</a>
-//   </p><p class="wiki-snippet">${snippet}...</p>
-//   `;
-// }
-
-//on wiki-entry click, have an iframe
-// $(".js-wikipedia-search-results").on("click", ".wiki-entry", handleWikiEntryClick);
-
-// function handleWikiEntryClick(e) {
-//   e.preventDefault();
-//   const body = $("#iframe").contents().find("body");
-//   const output = $(".wiki-entry-iframe");
-//   const url = $(this).data("url");
-
-//   $(".js-wikipedia-search-results").addClass("displayNone");
-//   $("#iframe").removeClass("displayNone");
-//   $("#iframe").attr("src", url);
-
-//   output
-//   .prop("hidden", false)
-
-//   $(".back-button").show();
-//   // .prop("hidden", false)
-
-//   $("#iframe")
-//   .prop("hidden", false)
-
-//   body
-//   .html(url)
-
-// }
 
 //on close button, disappear iframe
 $(".wiki-entry-iframe").on("click", ".close-button", handleCloseButtonClick);
@@ -203,9 +128,15 @@ function onAnnotatedLinkClick(e) {
   e.preventDefault();
   const body = $("#iframe").contents().find("body");
   const uri = $(this).data('uri');
+
+    // $("#iframe").attr("src", "");
   console.log('this is the annotated link clicked on', uri);
 
   const output = $(".wiki-entry-iframe");
+
+  //trying to figure out the problem of not being able to click on a second link without first hitting the x button
+  // $( '#iframe' ).attr( 'src', function ( i, val ) { return val; })
+
 
   $(".js-wikipedia-search-results").addClass("displayNone");
   $("#iframe").removeClass("displayNone");
@@ -240,7 +171,6 @@ function htmlifyNasaResults(data) {
 
     if (media_type === "image") {
 
-
       return `
         <h4 class="title">${title}</h4>
         <h4>Date: ${date}</h4>
@@ -272,7 +202,8 @@ function renderNasaSearchResults(data) {
     wikiSearchForm
     .prop('hidden', false);
 
-    // placeholderSuggestions();
+
+      // placeholderSuggestions();
 }
 
 
