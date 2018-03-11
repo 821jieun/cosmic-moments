@@ -132,7 +132,8 @@ function handleCloseButtonClick(e) {
   e.preventDefault();
   $("#iframe").addClass("displayNone");
   $("#iframe").attr("src", "");
-  $(".close-button").addClass("displayNone");
+  // $(".close-button").addClass("displayNone");
+  $(".close-button").hide();
 }
 
 function annotateWithDandelion(explanation){

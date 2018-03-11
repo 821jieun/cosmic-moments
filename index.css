@@ -121,9 +121,11 @@ section {
   flex: 1;
 }
 
-/*to ensure the iframe is full height*/
-.wiki-entry-iframe {
-  height: 100%;
+/*cursor*/
+.closeBtn:hover, .closeBtn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /* style iframe */
@@ -134,18 +136,20 @@ section {
   -webkit-flex-direction: column;
   -webkit-justify-content: stretch;
   justify-content: stretch;
-
+  height: 100%;
 }
 
 .close-button {
   color: #ccc;
   float: right;
-  font-size 30px
+  font-size: 30px;
+  flex: 1;
+  justify-content: flex-end;
 }
 
 #iframe {
   -webkit-flex: 1;
-  flex: 1;
+  flex: 15;
   border: 2px solid red;
 }
 
