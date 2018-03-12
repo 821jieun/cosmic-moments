@@ -137,6 +137,7 @@ section {
   -webkit-justify-content: stretch;
   justify-content: stretch;
   height: 100%;
+  margin-left: 20px;
 }
 
 .close-button {
@@ -144,7 +145,7 @@ section {
   float: right;
   font-size: 30px;
   flex: 1;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
 }
 
 #iframe {
