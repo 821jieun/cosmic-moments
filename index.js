@@ -129,13 +129,12 @@ function onAnnotatedLinkClick(e) {
   const body = $("#iframe").contents().find("body");
   const uri = $(this).data('uri');
 
-    // $("#iframe").attr("src", "");
+
   console.log('this is the annotated link clicked on', uri);
 
   const output = $(".wiki-entry-iframe");
 
-  //trying to figure out the problem of not being able to click on a second link without first hitting the x button
-  // $( '#iframe' ).attr( 'src', function ( i, val ) { return val; })
+  //need to figure out the problem of not being able to click on a second link without first hitting the x button
 
 
   $(".js-wikipedia-search-results").addClass("displayNone");
