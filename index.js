@@ -3,6 +3,15 @@
 const API_KEY = 'UO59leZhmMDtmeu9Fp5nTPOCDuMmYFD63bJbFSBU';
 const rootUrl = 'https://api.nasa.gov/planetary/apod?hd=True';
 
+//Loading message
+$(document).ajaxStart(function() {
+  $("#loading").show();
+});
+
+$(document).ajaxStop(function() {
+  $("#loading").hide();
+});
+
 //get today's date
 window.onload = todaysDate();
 
@@ -57,7 +66,6 @@ function handleCloseButtonClick(e) {
   e.preventDefault();
   $("#iframe").addClass("displayNone");
   $("#iframe").attr("src", "");
-  // $(".close-button").addClass("displayNone");
   $(".close-button").hide();
 }
 
@@ -126,16 +134,13 @@ $(".js-nasa-search-results").on("click", ".annotated-link", onAnnotatedLinkClick
 
 function onAnnotatedLinkClick(e) {
   e.preventDefault();
-  const body = $("#iframe").contents().find("body");
+  const body = $("#iframe").find("body");
   const uri = $(this).data('uri');
 
 
   console.log('this is the annotated link clicked on', uri);
 
   const output = $(".wiki-entry-iframe");
-
-  //need to figure out the problem of not being able to click on a second link without first hitting the x button
-
 
   $(".js-wikipedia-search-results").addClass("displayNone");
   $("#iframe").removeClass("displayNone");
@@ -161,9 +166,7 @@ function htmlifyNasaResults(data) {
     const placeholderText = `e.g. ${title}`;
 
     explanation = annotateWithDandelion(explanation);
-    // if (!explanation) {
-    //   explanation = "Loading..."
-    // }
+
     console.log('this is explanation inside htmlifyNasaResults', explanation)
 
     $("#wiki-query").attr("placeholder", placeholderText);
@@ -215,9 +218,7 @@ function handleNasaSubmitForm() {
 
     $("input").val('');
     getAstronomyPictureOfTheDay(rootUrl, searchDate)
-    // $("#wiki-query").val("");
-    // $(".wiki-search-results").hide();
-    // $("#iframe").hide();
+
   });
 
 }
