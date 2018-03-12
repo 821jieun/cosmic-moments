@@ -73,8 +73,8 @@ function annotateWithDandelion(explanation){
   const token = '2e0335e9f4b440f7aa8283398c390d69';
   let text = explanation;
   text = text.split(" ").join("%20");
-  // const url = `https://api.dandelion.eu/datatxt/nex/v1/?text=${text}&include=categories%2Cabstract%2Cimage%2Clod&token=${token}`;
-  const url = `https://api.dandelion.eu/datatxt/nex/v1/?text=${text}&token=${token}`;
+  const url = `https://api.dandelion.eu/datatxt/nex/v1/?text=${text}&include=categories%2Cabstract%2Cimage%2Clod&token=${token}&origin=*`;
+  // const url = `https://api.dandelion.eu/datatxt/nex/v1/?text=${text}&token=${token}`;
 
     $.ajax({
       url: url,
@@ -168,8 +168,6 @@ function htmlifyNasaResults(data) {
 
     explanation = annotateWithDandelion(explanation);
 
-    console.log('this is explanation inside htmlifyNasaResults', explanation)
-
     $("#wiki-query").attr("placeholder", placeholderText);
 
     if (media_type === "image") {
@@ -214,6 +212,13 @@ function renderNasaSearchResults(data) {
 function handleNasaSubmitForm() {
   $("#js-nasa-search-form").submit((e) => {
     event.preventDefault();
+    //if iframe is visible- from a prior nasa search- then, when submit
+    //button is clicked, make the iframe invisible
+    if (!$("#iframe").hasClass("displayNone")) {
+      $("#iframe").addClass("displayNone")
+    }
+
+
     let searchDate = $("#nasa-query").val();
     searchDate = convertDate(searchDate);
 
