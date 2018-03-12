@@ -33,6 +33,7 @@ img {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #iframe {
   height: 100%;
   width: 100%;
@@ -56,6 +57,8 @@ img {
     width: 100%;
     height: 100%;
 =======
+=======
+>>>>>>> aac959069f2619bf87324150820815b8e9b2efaa
 #iframe {
   height: 100%;
   width: 100%;
@@ -98,8 +101,14 @@ img {
 
 .wikiModal:hover {
   background: gray;
+<<<<<<< HEAD
 >>>>>>> modal
 }
+=======
+}
+
+.modal {
+>>>>>>> aac959069f2619bf87324150820815b8e9b2efaa
   display: none;
   position: fixed;
   z-index: 1;
@@ -140,6 +149,7 @@ img {
 }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> initial commit
 =======
 
@@ -154,3 +164,5 @@ img {
 >>>>>>> fixed slice index in convertDate function
 =======
 >>>>>>> modal
+=======
+>>>>>>> aac959069f2619bf87324150820815b8e9b2efaa
