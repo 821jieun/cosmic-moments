@@ -26,7 +26,7 @@
         <form id="js-nasa-search-form" role="form" class="form" action="/search" method="post">
           <div class="nativeDatePicker">
             <label class="user-direction" for="query">enter a date between <span class="start-date">June 16 1995</span> and <span class="todays-date">Mar 04 2018</span>: </label>
-            <input id="nasa-query" aria-label="nasa-search-box" name="search" type="date" min="1995-6-16" max=''>
+            <input id="nasa-query" aria-label="nasa-search-box" name="search" type="date" min="1995-6-16" max='' required>
 
           <span class="validity"></span>
           <!--fallback start-->
@@ -72,22 +72,12 @@
     </section>
 
     <section class="wikipedia-search">
-      <!-- <div class="wikipedia-search-form" hidden>
-        <form id="js-wikipedia-search-form" role="form" class="form" action="/search" method="post">
-          <label class="learn-more" for="query">learn more: </label>
-          <input id="wiki-query" aria-label="wiki-search-box" name="search" type="text" />
-          <button type="submit" class="wiki-button" aria-label="search-button">search</button>
-        </form>
-      </div> -->
-
 
       <div class="js-wikipedia-search-results" aria-live="assertive" hidden>
       </div>
 
       <div class="wiki-entry-iframe" aria-live="assertive" hidden>
         <span class="close-button" hidden>&times;</span>
-
-        <!-- <button class="back-button" hidden>back to results</button> -->
         <iframe id="iframe" title="wikipedia-entry" src="" height="100%" width="100%" hidden></iframe>
       </div>
 
