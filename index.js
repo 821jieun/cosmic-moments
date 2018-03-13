@@ -109,6 +109,8 @@ function findTextAddLink(wordAndUriPairs, explanation) {
   wordAndUriPairs.forEach((pair) => {
     let word = pair[0];
     let uri = pair[2];
+    uri = uri.replace(/^http:/, 'https:')
+    uri = uri.replace('en.wikipedia.org', 'en.m.wikipedia.org');
 
     if (expl.indexOf(word) !== -1) {
       let startIndex = expl.indexOf(word);
