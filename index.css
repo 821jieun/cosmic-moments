@@ -150,6 +150,10 @@ section {
   /* z-index: 1; */
 }
 
+span .close-button {
+  margin-right: 5px;
+}
+
 #iframe {
   -webkit-flex: 1;
   flex: 15;
