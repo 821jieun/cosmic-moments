@@ -104,8 +104,6 @@ section {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: rgb(211,211,211)
-
 }
 
 .learn-more {
@@ -145,10 +143,11 @@ section {
 }
 
 .close-button {
-  color: #ccc;
+  color: 	#121f1f;
   text-align: right;
   font-size: 30px;
   flex: 1;
+  /* z-index: 1; */
 }
 
 #iframe {
