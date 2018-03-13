@@ -30,19 +30,20 @@ body {
 .header {
   -webkit-flex: 1;
   flex: 1;
-  /* display: flex; */
-  /* align-items: flex-end; */
+  display: flex;
+  align-items: flex-end;
+  display: flex;
 }
 
 h1 {
+  flex: 3;
   font-family: 'Monoton', cursive;
-  font-size: 4em;
-  float: left;
+  font-size: 3em;
 }
 
 h2 {
+  flex: 1;
   font-size: 2em;
-  float: left;
 }
 
 h2:after {
@@ -58,7 +59,7 @@ h2:after {
 }
 
 .main {
-  -webkit-flex: 1;
+  -webkit-flex: 5;
   flex: 5;
   display: flex;
   font-size: 22px;
@@ -145,28 +146,25 @@ section {
 
 .close-button {
   color: #ccc;
-  float: right;
+  text-align: right;
   font-size: 30px;
   flex: 1;
-  /* justify-content: flex-end; */
 }
 
 #iframe {
   -webkit-flex: 1;
   flex: 15;
-  /* border: 2px solid red; */
+  border-radius: 20px;
 }
 
 /*image*/
 img {
   width: 100%;
   border-radius: 20px;
-  /* box-shadow: 8px 8px 10px #aaa; */
 }
 
 .nasa-video {
   width: 100%;
-  /* box-shadow: 8px 8px 10px #aaa; */
   border-radius: 20px;
 }
 
