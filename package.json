@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/821jieun/cosmic-moments/issues"
   },
-  "homepage": "https://github.com/821jieun/cosmic-moments#readme"
+  "homepage": "https://github.com/821jieun/cosmic-moments#readme",
+  "dependencies": {
+    "microlib-tabs": "^2.1.1"
+  }
 }

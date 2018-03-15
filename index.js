@@ -3,6 +3,38 @@
 const API_KEY = 'UO59leZhmMDtmeu9Fp5nTPOCDuMmYFD63bJbFSBU';
 const rootUrl = 'https://api.nasa.gov/planetary/apod?hd=True';
 
+//tabs
+function activateTab(prefix){
+
+  //hide all
+  $('.tab-content').removeClass('active')
+  $('.tab-nav a').removeClass('active')
+
+  //unhide the active ones
+  const contents = $(`#${prefix}-contents`)
+  contents.addClass('active')
+  const navLink = $(`#${prefix}-nav`)
+  navLink.addClass('active')
+
+}
+
+
+
+
+  $('body').on('click', '.show-wiki', ev=>{
+    ev.preventDefault()
+    activateTab('wiki')
+    //TODO load wiki page here
+  })
+
+  $('body').on('click', '.tab-nav a', ev=>{
+    ev.preventDefault()
+    const prefix = $(ev.target).attr('id').split('-')[0]
+    console.log('tab prefix', prefix)
+    activateTab(prefix)
+  })
+
+
 //Loading message
 $(document).ajaxStart(function() {
   $("#loading").show();
@@ -16,14 +48,6 @@ $(document).ajaxStop(function() {
 window.onload = todaysDate();
 
 //helper functions
-function placeholderSuggestions() {
-  const searchExamples = [ 'want some suggestions?', 'shooting stars', 'quasars', 'iridescent clouds', 'leo triplet', 'globular cluster', 'great comet', 'solar wind', 'nebula', 'From the Earth to the Moon', 'helix', 'neutron star', 'supernova', 'cosmic dust', 'electromagnetic radiation', 'paradigm shift', 'summer triangle', 'nova delphini' ];
-  setInterval(function() {
-    $("input#wiki-query").attr("placeholder", searchExamples[searchExamples.push(searchExamples.shift())-1]);
-  }, 3000);
-}
-
-
 function todaysDate() {
   const monthNames = [
     "January", "February", "March",
@@ -74,7 +98,6 @@ function annotateWithDandelion(explanation){
   let text = explanation;
   text = text.split(" ").join("%20");
   const url = `https://api.dandelion.eu/datatxt/nex/v1/?text=${text}&include=categories%2Cabstract%2Cimage%2Clod&token=${token}&origin=*`;
-  // const url = `https://api.dandelion.eu/datatxt/nex/v1/?text=${text}&token=${token}`;
 
     $.ajax({
       url: url,
@@ -119,8 +142,7 @@ function findTextAddLink(wordAndUriPairs, explanation) {
       let beforeWord = expl.slice(0, startIndex);
       let afterWord = expl.slice(endIndex);
       expl = expl.slice(endIndex);
-      // console.log('newly defined expl here', expl);
-      explWithLinksHtml += ` ${beforeWord}<a class="annotated-link" data-uri="${uri}" href="${uri}" alt="link to ${word}">${word}</a>`;
+      explWithLinksHtml += ` ${beforeWord}<a class="show-wiki annotated-link" data-uri="${uri}" href="${uri}" alt="link to ${word}">${word}</a>`;
 
     }
 
@@ -135,17 +157,14 @@ function findTextAddLink(wordAndUriPairs, explanation) {
 
 $(".js-nasa-search-results").on("click", ".annotated-link", onAnnotatedLinkClick);
 
+
 function onAnnotatedLinkClick(e) {
   e.preventDefault();
   const body = $("#iframe").find("body");
   const uri = $(this).data('uri');
-
-
-  console.log('this is the annotated link clicked on', uri);
-
   const output = $(".wiki-entry-iframe");
 
-  $(".js-wikipedia-search-results").addClass("displayNone");
+  // $(".js-wikipedia-search-results").addClass("displayNone");
   $("#iframe").removeClass("displayNone");
   $("#iframe").attr("src", uri);
 
@@ -154,10 +173,9 @@ function onAnnotatedLinkClick(e) {
   .prop("hidden", false)
 
   $(".close-button").show();
-  // .prop("hidden", false)
 
   $("#iframe")
-  .prop("hidden", false)
+  .prop("hidden", false);
 
   body
   .html(uri)
@@ -166,17 +184,13 @@ function onAnnotatedLinkClick(e) {
 //nasa search form
 function htmlifyNasaResults(data) {
     let { copyright="NASA", date, explanation, hdurl, title, url, media_type } = data;
-    const placeholderText = `e.g. ${title}`;
-
     explanation = annotateWithDandelion(explanation);
-
-    $("#wiki-query").attr("placeholder", placeholderText);
 
     if (media_type === "image") {
 
       return `
-        <h4 class="title">${title}</h4>
-        <h4>Date: ${date}</h4>
+        <h3 class="title">Title: ${title}</h3>
+        <h3>Date: ${date}</h3>
         <a href="${hdurl}" target="_blank" alt="${title}"><span class="sr-only">opens in new window</span><img alt="${title}" src="${url}"></a><p class="nasa-explanation">${explanation}</p>
         <p>copyright: ${copyright}</p>
         `;
@@ -184,8 +198,8 @@ function htmlifyNasaResults(data) {
 
     if (media_type === "video") {
       return `
-      <h4 class="title">${title}</h4>
-      <h4>Date: ${date}</h4>
+      <h3 class="title">Title: ${title}</h4>
+      <h3 class="date">Date: ${date}</h4>
       <iframe class="nasa-video" alt="${title}" src="${url}" width="100%" height="100%"></iframe><p class="nasa-explanation">${explanation}</p>
         <p>copyright: ${copyright}</p>
       `
@@ -205,13 +219,13 @@ function renderNasaSearchResults(data) {
     wikiSearchForm
     .prop('hidden', false);
 
-
-      // placeholderSuggestions();
 }
 
 
 
 function handleNasaSubmitForm() {
+    activateTab('search');
+
   $("#js-nasa-search-form").submit((e) => {
     event.preventDefault();
     //if iframe is visible- from a prior nasa search- then, when submit
@@ -252,7 +266,5 @@ function getAstronomyPictureOfTheDay(rootUrl, searchDate) {
    }
   });
 }
-
-
 
 $(handleNasaSubmitForm);

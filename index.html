@@ -20,13 +20,23 @@
     <h2>discover amazing photos from NASA's archive</h2>
   </header>
   <main class="main" role="main">
-    <section class="nasa-search">
+    <div class="tab-contents flex-container flex" aria-live="assertive" hidden>
+      <!-- <div class="nasa-tab" aria-live="assertive" hidden>nasa search</div>
+      <div class="wiki-tab"aria-live="assertive" hidden>wikipedia results</div> -->
+      <ul class="tab-nav flex-container">
+          <li class="flex nav-pill">
+            <a id="search-nav" href="">search NASA</a>
+          </li>
+          <li  class="flex nav-pill">
+            <a id="wiki-nav" href="">wikipedia results</a>
+          </li>
+        </ul>
+    <section id="search-contents" class="nasa-search tab-content flex v-scroll">
       <div class="nasa-search-form">
         <form id="js-nasa-search-form" role="form" class="form" action="/search" method="post">
           <div class="nativeDatePicker">
-
               <label class="user-direction" for="query">enter a date between <span class="start-date">June 16 1995</span> and <span class="todays-date">Mar 04 2018</span>: </label>
-      
+
               <div class="query-and-search">
               <input id="nasa-query" aria-label="nasa-search-box" name="search" type="date" min="1995-6-16" max='' required>
 
@@ -69,30 +79,23 @@
           </div>
         </form>
       </div>
-
       <div class="js-nasa-search-results" aria-live="assertive" hidden>
       </div>
       <div id="loading" class="displayNone">Loading...
       </div>
-
     </section>
 
-    <section class="wikipedia-search">
-
-      <div class="js-wikipedia-search-results" aria-live="assertive" hidden>
-      </div>
-
+    <section id="wiki-contents" class="wikipedia-search tab-content flex v-scroll">
       <div class="wiki-entry-iframe" aria-live="assertive" hidden>
         <span class="close-button" hidden>&times;</span>
-        <iframe id="iframe" title="wikipedia-entry" src="" height="100%" width="100%" hidden></iframe>
+        <iframe id="iframe" title="wikipedia-entry" src="" height="100%" width="100%" hidden>
+        </iframe>
       </div>
-
     </section>
 
-
   </div>
+</div>
 </main>
-
   <script src="index.js"></script>
   <script src="datepicker.js"></script>
 

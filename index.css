@@ -9,7 +9,7 @@
 body {
   font-family: 'Lora', serif;
   margin: 25px;
-
+  font-size: medium;
 }
 
 /* style date picker*/
@@ -134,7 +134,6 @@ section {
 .back-button:hover, .back-button:focus {
   color: black;
   text-decoration: none;
-  cursor: hand;
 }
 
 /* style iframe */
@@ -154,12 +153,12 @@ section {
   text-align: right;
   font-size: 30px;
   flex: 1;
-  /* z-index: 1; */
+  cursor: pointer;
 }
 
 #iframe {
-  -webkit-flex: 1;
-  flex: 15;
+  -webkit-flex: 25;
+  flex: 25;
   border-radius: 20px;
 }
 
@@ -189,4 +188,76 @@ img {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+}
+
+/*tabs*/
+.main{
+  height:100vh;
+}
+
+.flex{
+/*   this is an element within a flex container */
+  flex:1;
+}
+
+.v-scroll{
+  overflow-y:scroll;
+}
+
+.flex-container{
+  flex-wrap:no-wrap;
+  display:flex;
+}
+
+.flex-row{
+  flex-direction:row;
+}
+.flex-column{
+  flex-direction:column;
+}
+
+.nav-pill{
+  display:block;
+}
+.nav-pill a{
+  color: yellow;
+  border: 1px solid lightgreen;
+  text-decoration:none;
+  background:purple;
+  margin:.1em .5em;
+  padding:.5em;
+  border-radius:.3em;
+  display:block;
+}
+.nav-pill a:hover{
+  border: 1px solid green;
+}
+.nav-pill a.active{
+  background:lavender;
+  color:red;
+}
+
+.tab-contents{
+  flex-direction:row;
+}
+
+@media screen and (min-width:768px){
+  .tab-nav{
+    display:none;
+  }
+}
+
+@media screen and (max-width:768px){
+ .tab-contents{
+  flex-direction:column;
+  }
+
+  .tab-content{
+    display:none;
+  }
+
+  .tab-content.active{
+    display:block;
+  }
+
 }
