@@ -96,6 +96,7 @@ function handleCloseButtonClick(e) {
   $("#iframe").attr("src", "");
   //make nasa-search section fill the whole screen again
   $("#wiki-contents").css("flex-grow", "0");
+  // $("#wiki-contents").removeClass("has-contents");
   $(".close-button").hide();
 }
 

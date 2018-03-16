@@ -7,9 +7,11 @@
 }
 
 body {
-  font-family: 'Lora', serif;
+  /* font-family: 'Lora', serif; */
+  font-family: 'Libre Baskerville', serif;
+
   margin: 25px;
-  font-size: medium;
+  font-size: large;
 }
 
 /* style date picker*/
@@ -131,8 +133,12 @@ section {
   flex: 1;
 }
 
-button {
+input, button {
   border-radius: 12px;
+}
+
+button {
+  padding: 8px;
 }
 /*cursor*/
 .back-button:hover, .back-button:focus {
@@ -254,7 +260,6 @@ img {
 }
 
 /*media query */
-
 @media screen and (min-width:768px){
   .tab-nav{
     display:none;
@@ -274,6 +279,10 @@ img {
 
   .tab-content.active{
     display:block;
+  }
+
+  .close-button {
+    display: none;
   }
 
 }
