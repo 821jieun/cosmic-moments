@@ -59,6 +59,7 @@ h2:after {
 }
 
 .main {
+  height:100vh;
   -webkit-flex: 5;
   flex: 5;
   display: flex;
@@ -130,6 +131,9 @@ section {
   flex: 1;
 }
 
+button {
+  border-radius: 12px;
+}
 /*cursor*/
 .back-button:hover, .back-button:focus {
   color: black;
@@ -145,7 +149,7 @@ section {
   -webkit-justify-content: stretch;
   justify-content: stretch;
   height: 100%;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .close-button {
@@ -190,13 +194,16 @@ img {
   border: 0;
 }
 
-/*tabs*/
-.main{
-  height:100vh;
+/*transition from bigger viepowert to smaller viewport with tabs*/
+.tab-nav {
+  transition: all .4s linear;
+  height: 10vh;
+  opacity: 1;
+  overflow: hidden;
 }
 
+/*tabs*/
 .flex{
-/*   this is an element within a flex container */
   flex:1;
 }
 
@@ -205,7 +212,7 @@ img {
 }
 
 .flex-container{
-  flex-wrap:no-wrap;
+  flex-wrap:nowrap;
   display:flex;
 }
 
@@ -220,7 +227,7 @@ img {
   display:block;
 }
 .nav-pill a{
-  color: yellow;
+  color: #ffae42;
   border: 1px solid lightgreen;
   text-decoration:none;
   background:purple;
@@ -228,22 +235,31 @@ img {
   padding:.5em;
   border-radius:.3em;
   display:block;
+  text-align: center;
 }
 .nav-pill a:hover{
   border: 1px solid green;
+  text-align: center;
 }
+
 .nav-pill a.active{
-  background:lavender;
-  color:red;
+  background:#ffae42;
+  color:purple;
+  text-align: center;
+
 }
 
 .tab-contents{
   flex-direction:row;
 }
 
+/*media query */
+
 @media screen and (min-width:768px){
   .tab-nav{
     display:none;
+    /* height: 0;
+    opacity: 0; */
   }
 }
 
@@ -260,4 +276,23 @@ img {
     display:block;
   }
 
+}
+
+/*user sees only the nasa-search column upon enter*/
+
+#search-contents {
+  flex-grow: 1;
+}
+
+#wiki-contents {
+  flex-grow: 0;
+  flex-shrink: 2;
+}
+
+#wiki-contents.has-contents {
+  flex-grow: 1;
+}
+
+.transition {
+  transition: all .4s ease-out;
 }

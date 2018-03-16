@@ -21,8 +21,7 @@
   </header>
   <main class="main" role="main">
     <div class="tab-contents flex-container flex" aria-live="assertive" hidden>
-      <!-- <div class="nasa-tab" aria-live="assertive" hidden>nasa search</div>
-      <div class="wiki-tab"aria-live="assertive" hidden>wikipedia results</div> -->
+
       <ul class="tab-nav flex-container">
           <li class="flex nav-pill">
             <a id="search-nav" href="">search NASA</a>
@@ -31,7 +30,7 @@
             <a id="wiki-nav" href="">wikipedia results</a>
           </li>
         </ul>
-    <section id="search-contents" class="nasa-search tab-content flex v-scroll">
+    <section id="search-contents" class="nasa-search tab-content flex">
       <div class="nasa-search-form">
         <form id="js-nasa-search-form" role="form" class="form" action="/search" method="post">
           <div class="nativeDatePicker">
@@ -85,7 +84,7 @@
       </div>
     </section>
 
-    <section id="wiki-contents" class="wikipedia-search tab-content flex v-scroll">
+    <section id="wiki-contents" class="wikipedia-search tab-content flex">
       <div class="wiki-entry-iframe" aria-live="assertive" hidden>
         <span class="close-button" hidden>&times;</span>
         <iframe id="iframe" title="wikipedia-entry" src="" height="100%" width="100%" hidden>

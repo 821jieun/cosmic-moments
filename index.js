@@ -6,32 +6,36 @@ const rootUrl = 'https://api.nasa.gov/planetary/apod?hd=True';
 //tabs
 function activateTab(prefix){
 
+  if (prefix === 'wiki') {
+    $("#wiki-contents").addClass("has-contents");
+  }
+
   //hide all
-  $('.tab-content').removeClass('active')
-  $('.tab-nav a').removeClass('active')
+  $('.tab-content').removeClass('active');
+  $('.tab-nav a').removeClass('active');
 
   //unhide the active ones
-  const contents = $(`#${prefix}-contents`)
-  contents.addClass('active')
-  const navLink = $(`#${prefix}-nav`)
-  navLink.addClass('active')
+  const contents = $(`#${prefix}-contents`);
+  contents.addClass('active');
+  const navLink = $(`#${prefix}-nav`);
+  navLink.addClass('active');
 
 }
 
 
-
-
   $('body').on('click', '.show-wiki', ev=>{
-    ev.preventDefault()
+    ev.preventDefault();
     activateTab('wiki')
-    //TODO load wiki page here
   })
 
   $('body').on('click', '.tab-nav a', ev=>{
     ev.preventDefault()
-    const prefix = $(ev.target).attr('id').split('-')[0]
+    const prefix = $(ev.target)
+                    .attr('id')
+                    .split('-')[0];
+
     console.log('tab prefix', prefix)
-    activateTab(prefix)
+    activateTab(prefix);
   })
 
 
@@ -90,6 +94,8 @@ function handleCloseButtonClick(e) {
   e.preventDefault();
   $("#iframe").addClass("displayNone");
   $("#iframe").attr("src", "");
+  //make nasa-search section fill the whole screen again
+  $("#wiki-contents").css("flex-grow", "0");
   $(".close-button").hide();
 }
 
@@ -168,6 +174,8 @@ function onAnnotatedLinkClick(e) {
   $("#iframe").removeClass("displayNone");
   $("#iframe").attr("src", uri);
 
+  //ensure that wiki results show up; this will make flex-grow: 1 from flex-grow:0;
+  $("#wiki-contents").css("flex-grow", "1");
 
   output
   .prop("hidden", false)
@@ -228,8 +236,7 @@ function handleNasaSubmitForm() {
 
   $("#js-nasa-search-form").submit((e) => {
     event.preventDefault();
-    //if iframe is visible- from a prior nasa search- then, when submit
-    //button is clicked, make the iframe invisible
+
     if (!$("#iframe").hasClass("displayNone")) {
       $("#iframe").addClass("displayNone")
     }
