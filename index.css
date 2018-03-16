@@ -18,7 +18,7 @@ body {
 ::-webkit-datetime-edit { padding: 1em; }
 ::-webkit-datetime-edit-fields-wrapper { background: silver; }
 ::-webkit-datetime-edit-text { color: red; padding: 0 0.3em; }
-::-webkit-datetime-edit-month-field { color: blue; }
+::-webkit-datetime-edit-month-field { color: #1a237e; }
 ::-webkit-datetime-edit-day-field { color: green; }
 ::-webkit-datetime-edit-year-field { color: purple; }
 ::-webkit-inner-spin-button { display: none; }
@@ -257,6 +257,14 @@ img {
 
 .tab-contents{
   flex-direction:row;
+}
+
+#search-nav {
+  font-weight: bold;
+}
+
+#wiki-nav {
+  font-weight: bold;
 }
 
 /*media query */
