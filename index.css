@@ -16,7 +16,7 @@ body {
 
 /* style date picker*/
 ::-webkit-datetime-edit { padding: 1em; }
-::-webkit-datetime-edit-fields-wrapper { background: silver; }
+::-webkit-datetime-edit-fields-wrapper { background: #eeeeee; }
 ::-webkit-datetime-edit-text { color: red; padding: 0 0.3em; }
 ::-webkit-datetime-edit-month-field { color: #1a237e; }
 ::-webkit-datetime-edit-day-field { color: green; }
@@ -81,7 +81,6 @@ section {
   justify-content: space-around;
   -webkit-align-items: center;
   align-items: center;
-  /* background-color: rgb(211,211,211); */
   flex-direction: column;
 }
 
@@ -139,6 +138,7 @@ input, button {
 
 button {
   padding: 8px;
+  background-color: #eeeeee;
 }
 /*cursor*/
 .back-button:hover, .back-button:focus {
@@ -265,6 +265,18 @@ img {
 
 #wiki-nav {
   font-weight: bold;
+}
+
+.nasa-search-results {
+  background-color: #f5f5f5;
+}
+
+.nasa-explanation, .copyright {
+  padding:5px;
+  margin-top:5px;
+  margin-bottom:5px;
+  margin-left:20px;
+  margin-right:20px;
 }
 
 /*media query */

@@ -201,7 +201,7 @@ function htmlifyNasaResults(data) {
         <h3 class="title">Title: ${title}</h3>
         <h3>Date: ${date}</h3>
         <a href="${hdurl}" target="_blank" alt="${title}"><span class="sr-only">opens in new window</span><img alt="${title}" src="${url}"></a><p class="nasa-explanation">${explanation}</p>
-        <p>copyright: ${copyright}</p>
+        <p class="copyright">copyright: ${copyright}</p>
         `;
     }
 
@@ -210,7 +210,7 @@ function htmlifyNasaResults(data) {
       <h3 class="title">Title: ${title}</h4>
       <h3 class="date">Date: ${date}</h4>
       <iframe class="nasa-video" alt="${title}" src="${url}" width="100%" height="100%"></iframe><p class="nasa-explanation">${explanation}</p>
-        <p>copyright: ${copyright}</p>
+        <p class="copyright">copyright: ${copyright}</p>
       `
     }
 
