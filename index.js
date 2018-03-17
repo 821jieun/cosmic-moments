@@ -96,7 +96,6 @@ function handleCloseButtonClick(e) {
   $("#iframe").attr("src", "");
   //make nasa-search section fill the whole screen again
   $("#wiki-contents").css("flex-grow", "0");
-  // $("#wiki-contents").removeClass("has-contents");
   $(".close-button").hide();
 }
 
@@ -171,7 +170,6 @@ function onAnnotatedLinkClick(e) {
   const uri = $(this).data('uri');
   const output = $(".wiki-entry-iframe");
 
-  // $(".js-wikipedia-search-results").addClass("displayNone");
   $("#iframe").removeClass("displayNone");
   $("#iframe").attr("src", uri);
 
@@ -232,15 +230,17 @@ function renderNasaSearchResults(data) {
 
 
 function handleNasaSubmitForm() {
+
     activateTab('search');
 
-    // $("#wiki-contents").css("flex-grow", "0");
 
   $("#js-nasa-search-form").submit((e) => {
     event.preventDefault();
 
     if (!$("#iframe").hasClass("displayNone")) {
-      $("#iframe").addClass("displayNone")
+      $("#iframe").addClass("displayNone");
+      $(".close-button").css("display", "none");
+      $("#wiki-contents").css("flex-grow", "0");
     }
 
     let searchDate = $("#nasa-query").val();
