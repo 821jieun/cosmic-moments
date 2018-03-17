@@ -45,7 +45,6 @@ h1 {
 
 h2 {
   flex: 1;
-
 }
 
 h2:after {
@@ -123,7 +122,6 @@ section {
   -webkit-flex: 1;
   flex: 1;
   text-align: center;
-
 }
 
 #wiki-query {
@@ -144,7 +142,8 @@ button {
   padding: 8px;
   background-color: #eeeeee;
 }
-/*cursor*/
+
+/* style cursor*/
 .back-button:hover, .back-button:focus {
   color: black;
   text-decoration: none;
@@ -319,7 +318,6 @@ img {
 }
 
 /*user sees only the nasa-search column upon enter*/
-
 #search-contents {
   flex-grow: 1;
 }

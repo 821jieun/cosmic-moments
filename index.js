@@ -5,11 +5,9 @@ const rootUrl = 'https://api.nasa.gov/planetary/apod?hd=True';
 
 //tabs
 function activateTab(prefix){
-
   if (prefix === 'wiki') {
     $("#wiki-contents").addClass("has-contents");
   }
-
   //hide all
   $('.tab-content').removeClass('active');
   $('.tab-nav a').removeClass('active');
@@ -19,25 +17,22 @@ function activateTab(prefix){
   contents.addClass('active');
   const navLink = $(`#${prefix}-nav`);
   navLink.addClass('active');
-
 }
 
+$('body').on('click', '.show-wiki', ev=>{
+  ev.preventDefault();
+  activateTab('wiki')
+});
 
-  $('body').on('click', '.show-wiki', ev=>{
-    ev.preventDefault();
-    activateTab('wiki')
-  })
+$('body').on('click', '.tab-nav a', ev=>{
+  ev.preventDefault()
+  const prefix = $(ev.target)
+                  .attr('id')
+                  .split('-')[0];
 
-  $('body').on('click', '.tab-nav a', ev=>{
-    ev.preventDefault()
-    const prefix = $(ev.target)
-                    .attr('id')
-                    .split('-')[0];
-
-    console.log('tab prefix', prefix)
-    activateTab(prefix);
-  })
-
+  console.log('tab prefix', prefix)
+  activateTab(prefix);
+});
 
 //Loading message
 $(document).ajaxStart(function() {
@@ -68,13 +63,10 @@ function todaysDate() {
   $(".todays-date").text(date);
   date = convertDate(date);
   $("#nasa-query").attr("max", date);
-
 }
 
-
 function convertDate(dateString) {
-
-    //if using date-picker
+    //converting date selected from date-picker to correct format for NASA api
    let year = parseInt(dateString.slice(0, 4));
    let monthNum = parseInt(dateString.slice(6, 8));
    let date = parseInt(dateString.slice(-2))
@@ -85,7 +77,6 @@ function convertDate(dateString) {
       date: date
     }
 }
-
 
 //on close button, disappear iframe
 $(".wiki-entry-iframe").on("click", ".close-button", handleCloseButtonClick);
@@ -110,7 +101,6 @@ function annotateWithDandelion(explanation){
       dataType: 'json',
       type: 'GET',
       success: function(data) {
-        console.log('annotated dandelion data', data);
         matchTextAndUri(explanation, data);
       },
       error: function(err) {
@@ -127,7 +117,6 @@ function matchTextAndUri(explanation, data) {
     let annotatedText = explanation.slice(startIndex, endIndex);
     return [annotatedText, annotatedText.length, uri];
   });
-  console.log('wordAndUriPairs here', wordAndUriPairs)
   findTextAddLink(wordAndUriPairs, explanation);
 }
 
@@ -144,22 +133,14 @@ function findTextAddLink(wordAndUriPairs, explanation) {
     if (expl.indexOf(word) !== -1) {
       let startIndex = expl.indexOf(word);
       let endIndex = startIndex + pair[1] + 1;
-
       let beforeWord = expl.slice(0, startIndex);
       let afterWord = expl.slice(endIndex);
       expl = expl.slice(endIndex);
       explWithLinksHtml += ` ${beforeWord}<a class="show-wiki annotated-link" data-uri="${uri}" href="${uri}" alt="link to ${word}">${word}</a>`;
-
     }
-
-
   })
-  console.log('this is explanation inside findTextAddLink', `<p class="nasa-explanation">${explWithLinksHtml}</p>`);
   $(".nasa-explanation").html(`${explWithLinksHtml}.`);
-
 }
-
-
 
 $(".js-nasa-search-results").on("click", ".annotated-link", onAnnotatedLinkClick);
 
@@ -194,7 +175,6 @@ function htmlifyNasaResults(data) {
     explanation = annotateWithDandelion(explanation);
 
     if (media_type === "image") {
-
       return `
         <h3 class="title">Title: ${title}</h3>
         <h3>Date: ${date}</h3>
@@ -211,9 +191,7 @@ function htmlifyNasaResults(data) {
         <p class="copyright">copyright: ${copyright}</p>
       `
     }
-
 }
-
 
 function renderNasaSearchResults(data) {
   const output = $(".js-nasa-search-results");
@@ -225,14 +203,10 @@ function renderNasaSearchResults(data) {
 
     wikiSearchForm
     .prop('hidden', false);
-
 }
 
-
 function handleNasaSubmitForm() {
-
     activateTab('search');
-
 
   $("#js-nasa-search-form").submit((e) => {
     event.preventDefault();
@@ -248,9 +222,7 @@ function handleNasaSubmitForm() {
 
     $("input").val('');
     getAstronomyPictureOfTheDay(rootUrl, searchDate)
-
   });
-
 }
 
 function getAstronomyPictureOfTheDay(rootUrl, searchDate) {
@@ -261,11 +233,9 @@ function getAstronomyPictureOfTheDay(rootUrl, searchDate) {
   	dataType: 'json',
   	type: 'GET',
   	success: function(data) {
-      console.log('get astronomy picture of the day', data)
   		renderNasaSearchResults(data);
   	},
   error: function(err) {
-  console.log('error here', err.responseJSON.msg);
   const errorMessage = err.responseJSON.msg;
   const outputElem = $(".js-nasa-search-results");
   outputElem
