@@ -156,6 +156,7 @@ button {
   justify-content: stretch;
   height: 100%;
   margin-left: 10px;
+  border: 1px red solid;
 }
 
 .close-button {
@@ -285,8 +286,6 @@ img {
 @media screen and (min-width:768px){
   .tab-nav{
     display:none;
-    /* height: 0;
-    opacity: 0; */
   }
 }
 

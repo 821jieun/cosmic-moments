@@ -231,9 +231,10 @@ function renderNasaSearchResults(data) {
 }
 
 
-
 function handleNasaSubmitForm() {
     activateTab('search');
+
+    // $("#wiki-contents").css("flex-grow", "0");
 
   $("#js-nasa-search-form").submit((e) => {
     event.preventDefault();
@@ -241,7 +242,6 @@ function handleNasaSubmitForm() {
     if (!$("#iframe").hasClass("displayNone")) {
       $("#iframe").addClass("displayNone")
     }
-
 
     let searchDate = $("#nasa-query").val();
     searchDate = convertDate(searchDate);
