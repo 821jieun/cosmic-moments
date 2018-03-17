@@ -205,7 +205,7 @@ img {
   transition: all .4s linear;
   height: 10vh;
   opacity: 1;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 /*tabs*/
@@ -232,6 +232,7 @@ img {
 .nav-pill{
   display:block;
 }
+
 .nav-pill a{
   color: #ffae42;
   border: 1px solid lightgreen;
@@ -243,6 +244,7 @@ img {
   display:block;
   text-align: center;
 }
+
 .nav-pill a:hover{
   border: 1px solid green;
   text-align: center;
@@ -305,6 +307,9 @@ img {
     display: none;
   }
 
+  .nativeDatePicker {
+    margin-top: 25px;
+  }
 }
 
 /*user sees only the nasa-search column upon enter*/
