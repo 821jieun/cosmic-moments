@@ -20,11 +20,11 @@ switch between 'search nasa' tab and 'wikipedia results' tab:
 ![wikipedia results](images/mobile_view-2.png)
 
 ## built with
-*Javascript
-*Flex
-*JQuery
-*HTML5
+* Javascript
+* Flex
+* JQuery
+* HTML5
 
 ## features
-*search the NASA 'astronomy photo of the day' archive by date to capture a glimpse of our cosmos
-*learn more about any topics in the annotated NASA explanation 
+* search the NASA 'astronomy photo of the day' archive by date to capture a glimpse of our cosmos
+* learn more about any topics in the annotated NASA explanation 
