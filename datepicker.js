@@ -17,7 +17,6 @@ var test = document.createElement('input');
 test.type = 'date';
 
 // if it does, run the code inside the if() {} block
-console.log(test.type === 'text');
 if(test.type === 'text') {
   // hide the native picker and show the fallback
   nativePicker.style.display = 'none';

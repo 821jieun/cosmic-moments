@@ -4,7 +4,7 @@ function annotateWithDandelion(explanation){
   let text = explanation;
   text = text.split(" ").join("%20");
   const url = `https://api.dandelion.eu/datatxt/nex/v1/?text=${text}&include=categories%2Cabstract%2Cimage%2Clod&token=${token}&origin=*`;
-
+console.log('url', url)
     $.ajax({
       url: url,
       dataType: 'json',
@@ -14,7 +14,13 @@ function annotateWithDandelion(explanation){
       },
       error: function(err) {
         console.log(err);
-      }
+        const errorMessage = 'uh oh! something went awry...please try another date';
+        const outputElem = $('.nasa-explanation');
+        outputElem
+          .prop('hidden', false)
+          .html(`<p>${errorMessage}</p>`);
+         }
+
     });
 }
 
