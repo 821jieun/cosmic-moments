@@ -14,7 +14,7 @@ initial result with annotated links:
 result after click on link for more information:
 ![annotated text search](images/cosmic-moments_3.png)
 
-mobile view:
+## mobile view screenshots:
 ![search nasa](images/mobile_view-1.png)
 ![wikipedia results](images/mobile_view-2.png)
 
