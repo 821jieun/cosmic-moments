@@ -299,7 +299,7 @@ img {
 
 @media screen and (max-width:768px){
  .tab-contents{
-  flex-direction:column;
+    flex-direction:column;
   }
 
   .tab-content{
