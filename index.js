@@ -2,7 +2,13 @@
 //api call url
 const API_KEY = 'UO59leZhmMDtmeu9Fp5nTPOCDuMmYFD63bJbFSBU';
 const rootUrl = 'https://api.nasa.gov/planetary/apod?hd=True';
-
+//monthNames
+  const monthNames = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+  ];
 //caching frequently used jQuery selectors
 const iFrame = $('#iframe');
 const wikiContents = $('#wiki-contents');
@@ -51,12 +57,6 @@ window.onload = todaysDate();
 
 //helper functions
 function todaysDate() {
-  const monthNames = [
-    "January", "February", "March",
-    "April", "May", "June", "July",
-    "August", "September", "October",
-    "November", "December"
-  ];
   let n = new Date();
   const y = n.getFullYear();
   const m = n.getMonth();
@@ -207,6 +207,23 @@ function renderNasaSearchResults(data) {
     .prop('hidden', false);
 }
 
+function lessThanTen(num) {
+  if (num < 10) {
+    return `0${num}`;
+  } else {
+    return num;
+  }
+}
+function altSearchDate() {
+  const year = $('#year').val();
+  let month = $('#month').val();
+  month = monthNames.indexOf(month) + 1;
+  month = lessThanTen(month);
+  let day = $('#day').val();
+  day = lessThanTen(day);
+  return `${year}-${month}-${day}`
+}
+
 function handleNasaSubmitForm() {
     activateTab('search');
 
@@ -219,7 +236,9 @@ function handleNasaSubmitForm() {
       wikiContents.css('flex-grow', '0');
     }
 
-    let searchDate = nasaQuery.val();
+    let searchDate = nasaQuery.val() || altSearchDate();
+    console.log('search date here',searchDate)
+    console.log('search date here',typeof searchDate)
     searchDate = convertDate(searchDate);
 
     $('input').val('');

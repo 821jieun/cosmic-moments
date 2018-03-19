@@ -93,23 +93,26 @@ section {
   flex: 1;
   text-align: center;
   font-size: 20px;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .query-and-search {
   margin-top: 10px;
   -webkit-flex: 1;
   flex: 1;
+  text-align: center;
 }
 
 #nasa-query {
   -webkit-flex: 1;
   flex: 1;
+  margin-top: 10px
 }
 
 #nasa-button {
   -webkit-flex: 1;
   flex: 1;
+
 }
 
 /* style wiki search form */
@@ -139,6 +142,7 @@ input, button {
 button {
   padding: 8px;
   background-color: #eeeeee;
+  margin-top: 10px;
 }
 
 /* style cursor*/
@@ -318,7 +322,7 @@ img {
     display: none;
   }
 
-  .nativeDatePicker {
+  .nativeDatePicker, .fallbackDatePicker {
     margin-top: 25px;
   }
 
@@ -326,6 +330,9 @@ img {
     height: 100vh;
   }
 
+ .query-and-search {
+   margin-top: 20px;
+ }
 }
 
 /*user sees only the nasa-search column upon enter*/

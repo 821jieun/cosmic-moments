@@ -21,6 +21,8 @@ console.log(test.type === 'text');
 if(test.type === 'text') {
   // hide the native picker and show the fallback
   nativePicker.style.display = 'none';
+  //if nativeDatePicker is hidden, remove required attribute
+  document.querySelector('#nasa-query').removeAttribute("required");
   fallbackPicker.style.display = 'block';
   fallbackLabel.style.display = 'block';
 
