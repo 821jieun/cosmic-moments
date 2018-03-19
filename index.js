@@ -1,12 +1,17 @@
 'use strict';
-
+//api call url
 const API_KEY = 'UO59leZhmMDtmeu9Fp5nTPOCDuMmYFD63bJbFSBU';
 const rootUrl = 'https://api.nasa.gov/planetary/apod?hd=True';
+
+//caching frequently used jQuery selectors
+const iFrame = $('#iframe');
+const wikiContents = $('#wiki-contents');
+const nasaQuery = $('#nasa-query');
 
 //tabs
 function activateTab(prefix){
   if (prefix === 'wiki') {
-    $("#wiki-contents").addClass("has-contents");
+    wikiContents.addClass('has-contents');
   }
   //hide all
   $('.tab-content').removeClass('active');
@@ -29,18 +34,16 @@ $('body').on('click', '.tab-nav a', ev=>{
   const prefix = $(ev.target)
                   .attr('id')
                   .split('-')[0];
-
-  console.log('tab prefix', prefix)
   activateTab(prefix);
 });
 
 //Loading message
 $(document).ajaxStart(function() {
-  $("#loading").show();
+  $('#loading').show();
 });
 
 $(document).ajaxStop(function() {
-  $("#loading").hide();
+  $('#loading').hide();
 });
 
 //get today's date
@@ -60,9 +63,9 @@ function todaysDate() {
   const month = monthNames[m];
   const d = n.getDate();
   let date = `${month} ${d} ${y}`;
-  $(".todays-date").text(date);
+  $('.todays-date').text(date);
   date = convertDate(date);
-  $("#nasa-query").attr("max", date);
+  nasaQuery.attr("max", date);
 }
 
 function convertDate(dateString) {
@@ -79,15 +82,15 @@ function convertDate(dateString) {
 }
 
 //on close button, disappear iframe
-$(".wiki-entry-iframe").on("click", ".close-button", handleCloseButtonClick);
+$('.wiki-entry-iframe').on('click', '.close-button', handleCloseButtonClick);
 
 function handleCloseButtonClick(e) {
   e.preventDefault();
-  $("#iframe").addClass("displayNone");
-  $("#iframe").attr("src", "");
+  iFrame.addClass('displayNone');
+  iFrame.attr('src', '');
   //make nasa-search section fill the whole screen again
-  $("#wiki-contents").css("flex-grow", "0");
-  $(".close-button").hide();
+  wikiContents.css('flex-grow', '0');
+  $('.close-button').hide();
 }
 
 function annotateWithDandelion(explanation){
@@ -139,31 +142,30 @@ function findTextAddLink(wordAndUriPairs, explanation) {
       explWithLinksHtml += ` ${beforeWord}<a class="show-wiki annotated-link" data-uri="${uri}" href="${uri}" alt="link to ${word}">${word}</a>`;
     }
   })
-  $(".nasa-explanation").html(`${explWithLinksHtml}.`);
+  $('.nasa-explanation').html(`${explWithLinksHtml}.`);
 }
 
-$(".js-nasa-search-results").on("click", ".annotated-link", onAnnotatedLinkClick);
-
+$(".js-nasa-search-results").on('click', '.annotated-link', onAnnotatedLinkClick);
 
 function onAnnotatedLinkClick(e) {
   e.preventDefault();
-  const body = $("#iframe").find("body");
+  const body = iFrame.find('body');
   const uri = $(this).data('uri');
-  const output = $(".wiki-entry-iframe");
+  const output = $('.wiki-entry-iframe');
 
-  $("#iframe").removeClass("displayNone");
-  $("#iframe").attr("src", uri);
+  iFrame.removeClass('displayNone');
+  iFrame.attr('src', uri);
 
   //ensure that wiki results show up; this will make flex-grow: 1 from flex-grow:0;
-  $("#wiki-contents").css("flex-grow", "1");
+  wikiContents.css('flex-grow', '1');
 
   output
-  .prop("hidden", false)
+  .prop('hidden', false)
 
-  $(".close-button").show();
+  $('.close-button').show();
 
-  $("#iframe")
-  .prop("hidden", false);
+  iFrame
+  .prop('hidden', false);
 
   body
   .html(uri)
@@ -171,10 +173,10 @@ function onAnnotatedLinkClick(e) {
 
 //nasa search form
 function htmlifyNasaResults(data) {
-    let { copyright="NASA", date, explanation, hdurl, title, url, media_type } = data;
+    let { copyright='NASA', date, explanation, hdurl, title, url, media_type } = data;
     explanation = annotateWithDandelion(explanation);
 
-    if (media_type === "image") {
+    if (media_type === 'image') {
       return `
         <h3 class="title">Title: ${title}</h3>
         <h3>Date: ${date}</h3>
@@ -183,7 +185,7 @@ function htmlifyNasaResults(data) {
         `;
     }
 
-    if (media_type === "video") {
+    if (media_type === 'video') {
       return `
       <h3 class="title">Title: ${title}</h4>
       <h3 class="date">Date: ${date}</h4>
@@ -194,8 +196,8 @@ function htmlifyNasaResults(data) {
 }
 
 function renderNasaSearchResults(data) {
-  const output = $(".js-nasa-search-results");
-  const wikiSearchForm = $(".wikipedia-search-form")
+  const output = $('.js-nasa-search-results');
+  const wikiSearchForm = $('.wikipedia-search-form')
   const results = htmlifyNasaResults(data);
     output
     .prop('hidden', false)
@@ -208,19 +210,19 @@ function renderNasaSearchResults(data) {
 function handleNasaSubmitForm() {
     activateTab('search');
 
-  $("#js-nasa-search-form").submit((e) => {
+  $('#js-nasa-search-form').submit((e) => {
     event.preventDefault();
 
-    if (!$("#iframe").hasClass("displayNone")) {
-      $("#iframe").addClass("displayNone");
-      $(".close-button").css("display", "none");
-      $("#wiki-contents").css("flex-grow", "0");
+    if (!iFrame.hasClass('displayNone')) {
+      iFrame.addClass('displayNone');
+      $('.close-button').css('display', 'none');
+      wikiContents.css('flex-grow', '0');
     }
 
-    let searchDate = $("#nasa-query").val();
+    let searchDate = nasaQuery.val();
     searchDate = convertDate(searchDate);
 
-    $("input").val('');
+    $('input').val('');
     getAstronomyPictureOfTheDay(rootUrl, searchDate)
   });
 }
@@ -237,7 +239,7 @@ function getAstronomyPictureOfTheDay(rootUrl, searchDate) {
   	},
   error: function(err) {
   const errorMessage = err.responseJSON.msg;
-  const outputElem = $(".js-nasa-search-results");
+  const outputElem = $('.js-nasa-search-results');
   outputElem
     .prop('hidden', false)
     .html(`<p>${errorMessage}</p>`);
