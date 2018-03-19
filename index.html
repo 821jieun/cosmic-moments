@@ -8,6 +8,12 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
@@ -22,7 +28,6 @@
   </header>
   <main class="main" role="main">
     <div class="tab-contents flex-container flex" aria-live="assertive" hidden>
-
       <ul class="tab-nav flex-container">
           <li class="flex nav-pill">
             <a id="search-nav" href="">search NASA</a>
@@ -36,7 +41,6 @@
         <form id="js-nasa-search-form" role="form" class="form" action="/search" method="post">
           <div class="nativeDatePicker">
               <label class="user-direction" for="query">enter a date between <span class="start-date">June 16 1995</span> and <span class="todays-date">Mar 04 2018</span>: </label>
-
               <div class="query-and-search">
               <input id="nasa-query" aria-label="nasa-search-box" name="search" type="date" min="1995-6-16" max='' required>
 
@@ -89,7 +93,6 @@
     <section role="region" id="wiki-contents" class="wikipedia-search tab-content flex">
       <div class="wiki-entry-iframe" aria-live="assertive" hidden>
         <span class="close-button" hidden>&times;</span>
-
         <iframe id="iframe" title="wikipedia-entry" src="" height="100%" width="100%" hidden>
         </iframe>
       </div>
@@ -98,8 +101,7 @@
   </div>
 </div>
 </main>
-  <script src="index.js"></script>
-  <script src="datepicker.js"></script>
-
+  <script type="text/javascript" src="datepicker.js"></script>
+  <script type="text/javascript" src="index.js"></script>
 </body>
 </html>

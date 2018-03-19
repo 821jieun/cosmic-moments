@@ -7,7 +7,6 @@
 }
 
 body {
-  /* font-family: 'Lora', serif; */
   font-family: 'Libre Baskerville', serif;
   margin: 60px;
   font-size: large;
@@ -24,25 +23,27 @@ body {
 ::-webkit-calendar-picker-indicator { background: orange; }
 
 .container {
-  display: flex;
+  -webkit-flex-direction: column;
   flex-direction: column;
 }
 
 .header {
   -webkit-flex: 1;
   flex: 1;
+  display: -webkit-flex;
   display: flex;
   align-items: flex-end;
-  display: flex;
 }
 
 h1 {
+  -webkit-flex: 3;
   flex: 3;
   font-family: 'Monoton', cursive;
 
 }
 
 h2 {
+  -webkit-flex: 1;
   flex: 1;
 }
 
@@ -62,26 +63,27 @@ h2:after {
   height:100vh;
   -webkit-flex: 5;
   flex: 5;
+  display: -webkit-flex;
   display: flex;
-
   /*make iframe stretch fully*/
   height: 100%;
-
-
 }
 
 section {
   -webkit-flex: 1;
   flex: 1;
+  -webkit-justify-content: space-around;
   justify-content: space-around;
 }
 
 /* style nasa search form */
 .nativeDatePicker {
   display: -webkit-flex;
+  -webkit-justify-content: space-around;
+  -webkit-align-items: center;
+  -webkit-flex-direction: column;
   display: flex;
   justify-content: space-around;
-  -webkit-align-items: center;
   align-items: center;
   flex-direction: column;
 }
@@ -113,6 +115,7 @@ section {
 /* style wiki search form */
 #js-wikipedia-search-form {
   display: -webkit-flex;
+  -webkit-justify-content: space-around;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -122,11 +125,6 @@ section {
   -webkit-flex: 1;
   flex: 1;
   text-align: center;
-}
-
-#wiki-query {
-  -webkit-flex: 1;
-  flex: 4;
 }
 
 .wiki-button {
@@ -152,10 +150,10 @@ button {
 /* style iframe */
 .wiki-entry-iframe {
   display: -webkit-flex;
-  display: flex;
-  flex-direction: column;
   -webkit-flex-direction: column;
   -webkit-justify-content: stretch;
+  display: flex;
+  flex-direction: column;
   justify-content: stretch;
   height: 100%;
   margin-left: 10px;
@@ -186,7 +184,6 @@ img {
   border-radius: 20px;
 }
 
-
 .displayNone {
   display: none;
 }
@@ -211,27 +208,32 @@ img {
 }
 
 /*tabs*/
-.flex{
-  flex:1;
+.flex {
+  -webkit-flex: 1;
+  flex: 1;
 }
 
 .v-scroll{
-  overflow-y:scroll;
+  overflow-y: scroll;
 }
 
 .flex-container{
+  display: -webkit-flex;
+  display: -webkit-flex;
   flex-wrap:nowrap;
   display:flex;
 }
 
-.flex-row{
-  flex-direction:row;
+.flex-row {
+  -webkit-flex-direction: row;
+  flex-direction: row;
 }
-.flex-column{
-  flex-direction:column;
+.flex-column {
+  -webkit-flex-direction: column;
+  flex-direction: column;
 }
 
-.nav-pill{
+.nav-pill {
   display:block;
 }
 
@@ -260,6 +262,7 @@ img {
 }
 
 .tab-contents{
+  -webkit-flex-direction: row;
   flex-direction:row;
 }
 
@@ -299,6 +302,7 @@ img {
 
 @media screen and (max-width:768px){
  .tab-contents{
+    -webkit-flex-direction: column;
     flex-direction:column;
   }
 
@@ -326,14 +330,17 @@ img {
 
 /*user sees only the nasa-search column upon enter*/
 #search-contents {
+  -webkit-flex-grow: 1;
   flex-grow: 1;
 }
 
 #wiki-contents {
+  -webkit-flex-grow: 0;
   flex-grow: 0;
 }
 
 #wiki-contents.has-contents {
+  -webkit-flex-grow: 1;
   flex-grow: 1;
 }
 
