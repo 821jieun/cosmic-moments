@@ -177,7 +177,7 @@ button {
 
 /*image*/
 img {
-  width: 100%;
+  width: 75%;
   border-radius: 20px;
 }
 
@@ -275,6 +275,10 @@ img {
   background-color: #f5f5f5;
 }
 
+.js-nasa-search-results {
+  text-align: center;
+}
+
 .nasa-explanation, .copyright {
   padding:5px;
   margin-top:5px;
@@ -289,7 +293,7 @@ img {
     display:none;
   }
   .nasa-explanation, .copyright {
-    font-size: 25px;
+    font-size: 20px;
   }
 }
 
