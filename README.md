@@ -15,6 +15,7 @@ result after click on link for more information:
 ![annotated text search](images/cosmic-moments_3.png)
 
 ## mobile view screenshots:
+switch between 'search nasa' tab and 'wikipedia results' tab:
 ![search nasa](images/mobile_view-1.png)
 ![wikipedia results](images/mobile_view-2.png)
 
