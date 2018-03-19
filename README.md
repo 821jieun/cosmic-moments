@@ -4,7 +4,7 @@ an educational application to learn more about our universe. users can enter a d
 ## motivation
 i wanted to bring a small moment of appreciation for our amazing universe.
 
-##screenshots
+## screenshots
 landing page:
 ![landing page](images/cosmic-moments_1.png)
 
@@ -14,12 +14,16 @@ search:
 learn more:
 ![annotated text search](images/cosmic-moments_3.png)
 
-##built with
+mobile view:
+![search nasa](images/mobile_view-1.png)
+![wikipedia results](images/mobile_view-2.png)
+
+## built with
 *Javascript
 *Flex
 *JQuery
 *HTML5
 
-##features
+## features
 *search the NASA 'astronomy photo of the day' archive by date to capture a glimpse of our cosmos
 *learn more about any topics in the annotated NASA explanation 
