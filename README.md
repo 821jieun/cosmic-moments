@@ -5,13 +5,13 @@ an educational application to learn more about our universe. users can enter a d
 i wanted to enable small moments of appreciation for our universe
 
 ## screenshots
-landing page:
+landing and search page:
 ![landing page](images/cosmic-moments_1.png)
 
-search:
+initial result with annotated links:
 ![search](images/cosmic-moments_2.png)
 
-learn more:
+result after click on link for more information:
 ![annotated text search](images/cosmic-moments_3.png)
 
 mobile view:
