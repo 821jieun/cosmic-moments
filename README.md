@@ -2,7 +2,7 @@
 an educational application to learn more about our universe. users can enter a date to search NASA's 'astronomy picture of the day' archive. the explanation accompanying the image has been annotated using the semantics text analyzying Dandelion API. users can click on the link to learn more about the topic. the Wikipedia API searches and retrieves more information about the topic in a second panel. 
 
 ## motivation
-i wanted to bring a small moment of appreciation for our amazing universe.
+i wanted to enable small moments of appreciation for our universe
 
 ## screenshots
 landing page:
