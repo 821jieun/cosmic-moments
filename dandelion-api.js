@@ -3,37 +3,67 @@ function annotateWithDandelion(explanation){
   const token = '2e0335e9f4b440f7aa8283398c390d69';
   let text = explanation;
   text = text.split(" ").join("%20");
-  const url = `https://api.dandelion.eu/datatxt/nex/v1/?text=${text}&include=categories%2Cabstract%2Cimage%2Clod&token=${token}&origin=*`;
-console.log('url', url)
+  // const url = `https://api.dandelion.eu/datatxt/nex/v1/?text=${text}&include=categories%2Cabstract%2Cimage%2Clod&token=${token}&origin=*`;
+  const url = `https://api.dandelion.eu/datatxt/nex/v1/?text=${text}&top_entities=6&include=categories%2Cabstract%2Cimage%2Clod&token=${token}&origin=*`;
+
     $.ajax({
       url: url,
       dataType: 'json',
       type: 'GET',
       success: function(data) {
-        matchTextAndUri(explanation, data);
+        topEntities(explanation, data);
       },
       error: function(err) {
-        console.log(err);
         const errorMessage = 'uh oh! something went awry...please try another date';
         const outputElem = $('.nasa-explanation');
         outputElem
           .prop('hidden', false)
           .html(`<p>${errorMessage}</p>`);
          }
-
     });
 }
 
-function matchTextAndUri(explanation, data) {
-  let wordAndUriPairs = data.annotations.map((annotation) => {
-    let uri = annotation.uri;
-    let startIndex = annotation.start;
-    let endIndex = annotation.end;
-    let annotatedText = explanation.slice(startIndex, endIndex);
-    return [annotatedText, annotatedText.length, uri];
+function topEntities(explanation, data) {
+  const topEntities = data.topEntities; //array of 6 to annotate
+
+  //find the id of these six
+  const wordsToAnnotateIds = topEntities.map((entity) => {
+    return entity.id;
   });
+
+  matchTextAndUri(explanation, data, wordsToAnnotateIds)
+}
+
+function matchTextAndUri(explanation, data, wordsToAnnotateIds) {
+
+  let wordAndUriPairs = data.annotations.map((annotation) => {
+    let currentId = annotation.id;
+    if (wordsToAnnotateIds.indexOf(currentId) !== -1 ) {
+      let uri = annotation.uri;
+      let startIndex = annotation.start;
+      let endIndex = annotation.end;
+      let annotatedText = explanation.slice(startIndex, endIndex);
+      return [annotatedText, annotatedText.length, uri];
+    }
+  });
+  wordAndUriPairs = filterArray(wordAndUriPairs);
+  console.log('word and uri pairs:', wordAndUriPairs);
   findTextAddLink(wordAndUriPairs, explanation);
 }
+
+function filterArray(arr) {
+  return arr.filter((ele) => ele !== undefined);
+}
+// function matchTextAndUri(explanation, data) {
+//   let wordAndUriPairs = data.annotations.map((annotation) => {
+//     let uri = annotation.uri;
+//     let startIndex = annotation.start;
+//     let endIndex = annotation.end;
+//     let annotatedText = explanation.slice(startIndex, endIndex);
+//     return [annotatedText, annotatedText.length, uri];
+//   });
+//   findTextAddLink(wordAndUriPairs, explanation);
+// }
 
 function findTextAddLink(wordAndUriPairs, explanation) {
   let explWithLinksHtml = "";
