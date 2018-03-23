@@ -2,8 +2,7 @@
 function annotateWithDandelion(explanation){
   const token = '2e0335e9f4b440f7aa8283398c390d69';
   let text = explanation;
-  text = text.split(" ").join("%20");
-  // const url = `https://api.dandelion.eu/datatxt/nex/v1/?text=${text}&include=categories%2Cabstract%2Cimage%2Clod&token=${token}&origin=*`;
+  text = encodeURIComponent(text);
   const url = `https://api.dandelion.eu/datatxt/nex/v1/?text=${text}&top_entities=6&include=categories%2Cabstract%2Cimage%2Clod&token=${token}&origin=*`;
 
     $.ajax({
@@ -47,23 +46,12 @@ function matchTextAndUri(explanation, data, wordsToAnnotateIds) {
     }
   });
   wordAndUriPairs = filterArray(wordAndUriPairs);
-  console.log('word and uri pairs:', wordAndUriPairs);
   findTextAddLink(wordAndUriPairs, explanation);
 }
 
 function filterArray(arr) {
   return arr.filter((ele) => ele !== undefined);
 }
-// function matchTextAndUri(explanation, data) {
-//   let wordAndUriPairs = data.annotations.map((annotation) => {
-//     let uri = annotation.uri;
-//     let startIndex = annotation.start;
-//     let endIndex = annotation.end;
-//     let annotatedText = explanation.slice(startIndex, endIndex);
-//     return [annotatedText, annotatedText.length, uri];
-//   });
-//   findTextAddLink(wordAndUriPairs, explanation);
-// }
 
 function findTextAddLink(wordAndUriPairs, explanation) {
   let explWithLinksHtml = "";
