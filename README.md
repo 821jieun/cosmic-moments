@@ -20,8 +20,8 @@ switch between 'search nasa' tab and 'wikipedia results' tab:
 ![wikipedia results](images/mobile_view-2.png)
 
 ## built with
-* Javascript
-* Flex
+* JavaScript
+* Flexbox
 * JQuery
 * HTML5
 
